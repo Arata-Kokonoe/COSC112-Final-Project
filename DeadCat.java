@@ -1,3 +1,3 @@
-public Class DeadCat extends Cat{
+public class DeadCat extends Cat{
 
 }
