@@ -43,8 +43,8 @@ public class World{
 
     // =====================================================================
     public void drawWorld(Graphics g){
-        map.draw(g);
-        currentRoom.draw(g);
+        //map.draw(g);
+        //currentRoom.draw(g);
         player.draw(g);
     } // drawWorld ()
     // =====================================================================
@@ -53,7 +53,7 @@ public class World{
 
     // =====================================================================
     public void updateWorld(double time){
-        currentRoom.update(time);
+        //currentRoom.update(time);
         player.update(time);
     } // updateWorld ()
     // =====================================================================
