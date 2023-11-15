@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
 
 
 // =========================================================================
-public class MiltonGame extends JPanel implements KeyListener{
+public class Main extends JPanel implements KeyListener{
 // =========================================================================
 
 
@@ -103,13 +103,13 @@ public class MiltonGame extends JPanel implements KeyListener{
     /**
      * The specialized constructor.
      **/
-    public MiltonGame(){
+    public Main(){
         world = new World(WIDTH, HEIGHT);
         addKeyListener(this);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
         mainThread.start();
-    } // MiltonGame ()
+    } // Main ()
     // =====================================================================
 
 
@@ -118,7 +118,7 @@ public class MiltonGame extends JPanel implements KeyListener{
     public static void main(String[] args) {
         JFrame frame = new JFrame("New Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        MiltonGame mainInstance = new MiltonGame();
+        Main mainInstance = new Main();
         frame.setContentPane(mainInstance);
         frame.pack();
         frame.setVisible(true);
