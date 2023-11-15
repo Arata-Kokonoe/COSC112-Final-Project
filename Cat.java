@@ -1,6 +1,6 @@
 import java.awt.Graphics;
 import java.io.File;
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class Cat implements canShoot{
     public double stateCD;
     public int width;
     public int height;
-    public Image sprite = ImageIO.read(new File("SmallNyanCat.png"));
+    private BufferedImage sprite;
 
     public Cat(){
         positionX = 500;
@@ -25,6 +25,12 @@ public class Cat implements canShoot{
         lives = 9;
         width = 60;
         height = 35;
+
+        try {                
+            sprite = ImageIO.read(new File("SmallNyanCat.png"));
+        } 
+        catch (IOException ex) {
+        }
     }
 
     public void draw(Graphics g){

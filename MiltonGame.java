@@ -118,7 +118,7 @@ public class MiltonGame extends JPanel implements KeyListener{
     public static void main(String[] args) {
         JFrame frame = new JFrame("New Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        miltonGame mainInstance = new miltonGame();
+        MiltonGame mainInstance = new MiltonGame();
         frame.setContentPane(mainInstance);
         frame.pack();
         frame.setVisible(true);
