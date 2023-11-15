@@ -62,8 +62,12 @@ public class Main extends JPanel implements KeyListener{
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
         System.out.println("You pressed down: " + c);
-        if (c == 'a'){}; // moves left
-        if (c == 'd'){}; // moves right
+        if (c == 'a'){
+            world.player.velocityX = -50;
+        }; // moves left
+        if (c == 'd'){
+            world.player.velocityX = 50;
+        }; // moves right
         if (c == ' '){}; // jumps
         if (c == 'j'){}; // attacks
         if (c == 'k'){}; // switches between dead and alive
