@@ -1,5 +1,6 @@
 // =========================================================================
 // IMPORTS
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -10,9 +11,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent; 
 // =========================================================================
 
+
+
 // =========================================================================
 public class MiltonGame extends JPanel implements KeyListener{
 // =========================================================================
+
+
 
     // =====================================================================
     // DATA MEMBERS
@@ -23,9 +28,13 @@ public class MiltonGame extends JPanel implements KeyListener{
     World world;
     // =====================================================================
 
+
+
     // =====================================================================
     class Runner implements Runnable{
     // =====================================================================
+
+
 
         // =================================================================
         public void run() {
@@ -41,10 +50,14 @@ public class MiltonGame extends JPanel implements KeyListener{
         } // run ()
         // =================================================================
 
+
+
     // =====================================================================
     } // class Runner 
     // =====================================================================
     
+
+
     // =====================================================================
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
@@ -59,24 +72,31 @@ public class MiltonGame extends JPanel implements KeyListener{
     } // keyPressed ()
     // =====================================================================
 
+
+
     // =====================================================================
     public void keyReleased(KeyEvent e) {
-        char c=e.getKeyChar();
+        char c = e.getKeyChar();
     } // keyReleased ()
     // =====================================================================
  
+
+
     // =====================================================================
     public void keyTyped(KeyEvent e) {
     	char c = e.getKeyChar();
     } // keyTyped ()
     // =====================================================================
     
+
+
     // =====================================================================
     public void addNotify() {
         super.addNotify();
         requestFocus();
     } // addNotify ()
     // =====================================================================
+
 
 
     // =====================================================================
@@ -92,6 +112,8 @@ public class MiltonGame extends JPanel implements KeyListener{
     } // MiltonGame ()
     // =====================================================================
 
+
+
     // =====================================================================
     public static void main(String[] args) {
         JFrame frame = new JFrame("New Game");
@@ -103,6 +125,8 @@ public class MiltonGame extends JPanel implements KeyListener{
     } // main ()
     // =====================================================================
 
+
+
     // =====================================================================
     public void paintComponent(Graphics g) {
         super.paintComponent(g);        
@@ -113,6 +137,8 @@ public class MiltonGame extends JPanel implements KeyListener{
         world.drawWorld(g); 
     } // paintCompnent ()
     // =====================================================================
+
+
 
 // =========================================================================
 } // class MiltonGame
