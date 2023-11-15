@@ -39,7 +39,7 @@ public class Main extends JPanel implements KeyListener{
         // =================================================================
         public void run() {
             while(true){
-                world.updateWorld(FPS);
+                world.updateWorld(1.0/FPS);
                 repaint();
             try{
                 Thread.sleep(1000/FPS);
