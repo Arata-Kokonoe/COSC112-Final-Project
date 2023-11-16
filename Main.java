@@ -63,10 +63,10 @@ public class Main extends JPanel implements KeyListener{
         char c = e.getKeyChar();
         System.out.println("You pressed down: " + c);
         if (c == 'a'){
-            world.player.velocityX = -50;
+            world.player.velocityX = -100;
         }; // moves left
         if (c == 'd'){
-            world.player.velocityX = 50;
+            world.player.velocityX = 100;
         }; // moves right
         if (c == ' '){}; // jumps
         if (c == 'j'){}; // attacks

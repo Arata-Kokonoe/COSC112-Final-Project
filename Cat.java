@@ -8,8 +8,8 @@ public class Cat implements canShoot{
     public double lives;
     public boolean state;
     public int experience;
-    public int positionX;
-    public int positionY;
+    public double positionX;
+    public double positionY;
     public double velocityX;
     public double velocityY;
     public double accelerationX;
@@ -34,12 +34,12 @@ public class Cat implements canShoot{
     }
 
     public void draw(Graphics g){
-        g.drawImage(sprite, positionX, positionY, null);
+        g.drawImage(sprite, (int)positionX, (int)positionY, null);
     }
 
     public void update(double time){
-        positionX = (int)(positionX + (velocityX * time));
-        positionY = (int)(positionX + (velocityY * time));
+        positionX = (positionX + (velocityX * time));
+        positionY = (positionY + (velocityY * time));
         velocityX = velocityX + (accelerationX * time);
         velocityY = velocityY + (accelerationY * time);
     }
