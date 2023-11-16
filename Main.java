@@ -68,7 +68,9 @@ public class Main extends JPanel implements KeyListener{
         if (c == 'd'){
             world.player.velocityX = 100;
         }; // moves right
-        if (c == ' '){}; // jumps
+        if (c == ' '){
+            world.player.velocityY = -100;
+        }; // jumps, but right now if the player keeps holding space the cat starts flying
         if (c == 'j'){}; // attacks
         if (c == 'k'){}; // switches between dead and alive
         if (c == 'm'){}; // opens map
@@ -81,6 +83,12 @@ public class Main extends JPanel implements KeyListener{
     // =====================================================================
     public void keyReleased(KeyEvent e) {
         char c = e.getKeyChar();
+        if (c == 'a'){
+            world.player.velocityX = 0;
+        }; // stops movement
+        if (c == 'd'){
+            world.player.velocityX = 0;
+        }; // stops movement
     } // keyReleased ()
     // =====================================================================
  

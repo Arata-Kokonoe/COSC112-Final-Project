@@ -52,11 +52,11 @@ public class Cat implements canShoot{
         else if (positionY < 0) positionY = 0; //checks if top of cat has touched top of world
         if (positionX + width > w.width) positionX = w.width - width; //checks if right side of cat has touched the right side of world
         else if (positionX < 0) positionX = 0; //checks if left side of cat has touched the left side of world
-        for (Platform p : w.currentRoom.current.platforms){
+        /* for (Platform p : w.currentRoom.current.platforms){
             //write code to check if the cat is touching the platforms
             //i think we should create a hitbox class that holds the x and y values of each side of an entity
             //then make it have a touch method that checks if two hitboxes are "touching"
-        }
+        } */
     }
 
     public void shoot(){
