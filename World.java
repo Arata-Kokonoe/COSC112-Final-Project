@@ -55,7 +55,7 @@ public class World{
     // =====================================================================
     public void updateWorld(double time){
         //currentRoom.update(time);
-        player.update(time);
+        player.update(this, time);
     } // updateWorld ()
     // =====================================================================
 
