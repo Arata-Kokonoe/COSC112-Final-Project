@@ -18,8 +18,8 @@ public class World{
 
     public int width;
     public int height;
-    public Node firstRoom;
-    public Node currentRoom;
+    public Room firstRoom;
+    public Room currentRoom;
     public Cat player;
     public Map map;
     public final Random RNG = new Random(12345); //find a way to change 12345 into a random seed (AKA key)
@@ -35,7 +35,8 @@ public class World{
         player = new Cat();
 
         //firstRoom = new Node(new Room(RNG.nextInt(5))); replace whats inside .nextInt() with however many rooms we design
-        firstRoom = new Node(new Room(0)); //temporary to test just one room
+        firstRoom = new Room(0); //temporary to test just one room
+        currentRoom = firstRoom;
 
     } // World ()
     // =====================================================================
@@ -45,7 +46,7 @@ public class World{
     // =====================================================================
     public void drawWorld(Graphics g){
         //map.draw(g);
-        //currentRoom.draw(g);
+        currentRoom.draw(this, g);
         player.draw(g);
     } // drawWorld ()
     // =====================================================================
@@ -54,7 +55,7 @@ public class World{
 
     // =====================================================================
     public void updateWorld(double time){
-        //currentRoom.update(time);
+        currentRoom.update(this, time);
         player.update(this, time);
     } // updateWorld ()
     // =====================================================================

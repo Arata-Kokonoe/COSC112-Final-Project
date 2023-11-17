@@ -41,10 +41,10 @@ public class Main extends JPanel implements KeyListener{
             while(true){
                 world.updateWorld(1.0/FPS);
                 repaint();
-            try{
-                Thread.sleep(1000/FPS);
-                }
-            catch(InterruptedException e){}
+                try{
+                    Thread.sleep(1000/FPS);
+                    }
+                catch(InterruptedException e){}
             }
      
         } // run ()
@@ -63,14 +63,17 @@ public class Main extends JPanel implements KeyListener{
         char c = e.getKeyChar();
         System.out.println("You pressed down: " + c);
         if (c == 'a'){
-            world.player.velocityX = -100;
+            world.player.catVelocity.x = -150;
         }; // moves left
         if (c == 'd'){
-            world.player.velocityX = 100;
+            world.player.catVelocity.x = 150;
         }; // moves right
         if (c == ' '){
-            world.player.velocityY = -100;
-        }; // jumps, but right now if the player keeps holding space the cat starts flying
+            System.out.println(world.player.catVelocity.y);
+            if (world.player.catVelocity.y == 0.0){
+                world.player.catVelocity.y = -150.0;
+            }
+        }
         if (c == 'j'){}; // attacks
         if (c == 'k'){}; // switches between dead and alive
         if (c == 'm'){}; // opens map
@@ -83,11 +86,11 @@ public class Main extends JPanel implements KeyListener{
     // =====================================================================
     public void keyReleased(KeyEvent e) {
         char c = e.getKeyChar();
-        if (c == 'a'){
-            world.player.velocityX = 0;
+        if (c == 'a' && world.player.catVelocity.x == -150){
+            world.player.catVelocity.x = 0.0;
         }; // stops movement
-        if (c == 'd'){
-            world.player.velocityX = 0;
+        if (c == 'd' && world.player.catVelocity.x == 150){
+            world.player.catVelocity.x = 0.0;
         }; // stops movement
     } // keyReleased ()
     // =====================================================================
