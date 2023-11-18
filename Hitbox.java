@@ -32,8 +32,6 @@ public class Hitbox {
 
     public boolean rightCollision(Hitbox other){
         if ((hitboxLeft <= other.hitboxRight) && (hitboxLeft >= other.hitboxLeft) && (!this.isOnTopOf(other)) && (!this.isOnBotOf(other)) && ((hitboxTop > other.hitboxTop && hitboxTop < other.hitboxBot) || (hitboxBot > other.hitboxTop && hitboxBot < other.hitboxBot))){
-            System.out.println("Cat left: \t" + hitboxLeft + "\nCat right: \t" + hitboxRight + "\nCat top: \t" + hitboxTop + "\nCat bot: \t" + hitboxBot);
-            System.out.println("Platform left: \t" + other.hitboxLeft + "\nPlatform right:\t" + other.hitboxRight + "\nPlatform top: \t" + other.hitboxTop + "\nPlatform bot: \t" + other.hitboxBot);
             return true;
         }
         else return false;
@@ -42,8 +40,6 @@ public class Hitbox {
 
     public boolean botCollision(Hitbox other){
         if ((hitboxTop < other.hitboxBot) && (hitboxTop > other.hitboxTop) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) || (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))){
-            System.out.println("Cat left: \t" + hitboxLeft + "\nCat right: \t" + hitboxRight + "\nCat top: \t" + hitboxTop + "\nCat bot: \t" + hitboxBot);
-            System.out.println("Platform left: \t" + other.hitboxLeft + "\nPlatform right:\t" + other.hitboxRight + "\nPlatform top: \t" + other.hitboxTop + "\nPlatform bot: \t" + other.hitboxBot);
             return true;
         }
         else return false;

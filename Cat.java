@@ -96,7 +96,6 @@ public class Cat implements canShoot{
                 if ((catHitbox.hitboxBot <= p.platformHitbox.hitboxTop + 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
                     catPosition.y = p.platformPosition.y - catDimensions.y;
                     catVelocity.y = 0.0;
-                    System.out.println(catPosition.y);
                     collision = true;
                 }
                 else if ((catHitbox.hitboxTop >= p.platformHitbox.hitboxBot - 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
@@ -106,7 +105,6 @@ public class Cat implements canShoot{
                 }
                 else{
                     catPosition.x = p.platformPosition.x - catDimensions.x;
-                    System.out.println("Collided with left of platform");
                     collision = true;
                 }
             }
@@ -114,7 +112,6 @@ public class Cat implements canShoot{
                 if ((catHitbox.hitboxBot <= p.platformHitbox.hitboxTop + 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
                     catPosition.y = p.platformPosition.y - catDimensions.y;
                     catVelocity.y = 0.0;
-                    System.out.println(catPosition.y);
                     collision = true;
                 }
                 else if ((catHitbox.hitboxTop >= p.platformHitbox.hitboxBot - 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
@@ -124,7 +121,6 @@ public class Cat implements canShoot{
                 }
                 else{
                     catPosition.x = p.platformPosition.x + p.platformDimensions.x;
-                    System.out.println("Collided with right of platform");
                     collision = true;
                 }
             }
@@ -132,10 +128,8 @@ public class Cat implements canShoot{
                 catPosition.y = p.platformPosition.y - catDimensions.y;
                 catVelocity.y = 0.0;
                 collision = true;
-                //System.out.println("Collided with top of platform");
             }
             else if (catHitbox.botCollision(p.platformHitbox)){
-                System.out.println("Cat Position: " + catPosition.x + ", " + catPosition.y);
                 catPosition.y = p.platformPosition.y + p.platformDimensions.y + 1;
                 catVelocity.y = 0.0;
                 collision = true;
