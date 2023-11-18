@@ -15,6 +15,8 @@ public class Room{
     public Room prev;
     public Room next1;
     public Room next2;
+    public Door door1;
+    public Door door2;
 
     public Room(int roomType){
         this.roomType = roomType;
@@ -29,6 +31,8 @@ public class Room{
             platforms.add(new Platform(300, 225, 70));
             platforms.add(new Platform(0, 125, 250));
             button = new Button(175, 100);
+            door1 = new Door(25, 50);
+            
             System.out.println("Room 0 created");
         }
         else if (roomType == 1){
@@ -50,6 +54,8 @@ public class Room{
             p.draw(g);
         }
         button.draw(w, g);
+        if(door1 != null) door1.draw(w, g);
+        if(door2 != null) door2.draw(w, g);
         /* for (Enemy e : enemies){
             e.draw(g);
         }

@@ -151,6 +151,8 @@ public class Cat implements canShoot{
 
         if (catHitbox.anyCollision(w.currentRoom.button.buttonHitbox)){
             w.currentRoom.button.pressed = true;
+            if(w.currentRoom.door1 != null) w.currentRoom.door1.unlocked = true;
+            if(w.currentRoom.door2 != null) w.currentRoom.door2.unlocked = true;
             w.currentRoom.gas.vanish();
         }
         return collision;
