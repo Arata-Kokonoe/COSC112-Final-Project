@@ -5,6 +5,8 @@ To run, type "java Main" into the command prompt.
 
 Title of Project: Milton's Escape
 
+Authors: Mana Harada, Andrew Han
+
 Description: "This program will be our own take on a video game combining both aspects of the platformer and roguelike genres. 
     The theme of the game will revolve around Schrodinger’s Cat thought experiment, where the player will play as a cat named “Milton” trapped inside of a cardboard box. 
     They will have to traverse through procedurally generated rooms while in constant danger from poisonous gas filling each room, along with enemies trying to kill them at every turn. 
