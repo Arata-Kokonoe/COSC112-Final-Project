@@ -71,7 +71,7 @@ public class Main extends JPanel implements KeyListener{
         if (c == ' '){
             System.out.println(world.player.catVelocity.y);
             if (world.player.catVelocity.y == 0.0){
-                world.player.catVelocity.y = -150.0;
+                world.player.catVelocity.y = -200.0;
             }
         }
         if (c == 'j'){}; // attacks

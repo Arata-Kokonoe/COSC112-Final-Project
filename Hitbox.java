@@ -70,6 +70,10 @@ public class Hitbox {
         else return false;
     }
 
+    public boolean anyCollision(Hitbox other){
+        return this.botCollision(other) || this.topCollision(other) || this.leftCollision(other) || this.rightCollision(other);
+    }
+
     public void update(Pair position){
         hitboxLeft = (int)position.x;
         hitboxRight = (int)position.x + hitboxWidth;

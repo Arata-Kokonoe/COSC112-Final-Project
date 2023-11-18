@@ -10,6 +10,7 @@ public class Room{
      * Different number ranges = different difficulties (i.e. 1-5 is easy rooms, 6-10 is medium, 11-15 is hard, etc.)
      */
     public ArrayList<Platform> platforms; // all of the platforms in the room
+    public Button button;
     public Gas gas;
     public Room prev;
     public Room next1;
@@ -20,10 +21,14 @@ public class Room{
         platforms = new ArrayList<Platform>();
         gas = new Gas();
         if (roomType == 0){
-            platforms.add(new Platform(387, 725, 250));
             platforms.add(new Platform(0, 650, 250));
-            platforms.add(new Platform(387, 600, 250));
-            platforms.add(new Platform(774, 550, 250));
+            platforms.add(new Platform(387, 550, 250));
+            platforms.add(new Platform(774, 475, 250));
+            platforms.add(new Platform(600, 375, 70));
+            platforms.add(new Platform(450, 300, 70));
+            platforms.add(new Platform(300, 225, 70));
+            platforms.add(new Platform(0, 125, 250));
+            button = new Button(175, 100);
             System.out.println("Room 0 created");
         }
         else if (roomType == 1){
@@ -44,6 +49,7 @@ public class Room{
         for (Platform p : platforms){
             p.draw(g);
         }
+        button.draw(w, g);
         /* for (Enemy e : enemies){
             e.draw(g);
         }

@@ -7,14 +7,20 @@ import java.io.IOException;
 
 public class Gas{
     public int height;
-    public BufferedImage sprite;
+    public int lineHeight;
+    public BufferedImage gasSprite;
+    public BufferedImage lineSprite;
+    public boolean exists;
     public int counter;
 
     public Gas(){
         height = 0;
+        lineHeight = 50;
+        exists = true;
 
         try {                
-            sprite = ImageIO.read(new File("Gas.png"));
+            gasSprite = ImageIO.read(new File("Gas.png"));
+            lineSprite = ImageIO.read(new File("redDottedLine.png"));
         } 
         catch (IOException ex) {
             System.out.println("Failed to find image.");
@@ -22,14 +28,31 @@ public class Gas{
     }
 
     public void draw(World w, Graphics g){
-        g.drawImage(sprite, 0, w.height - height, null);
+        g.drawImage(gasSprite, 0, w.height - height, null);
+        g.drawImage(lineSprite, 0, w.height - lineHeight - lineSprite.getHeight()/2, null);
     }
 
     public void update(double time){
-        counter += (int)(60 * time);
-        if (counter == 180) {
-            height += 50;
-            counter = 0;
+        if (exists){
+            counter += (int)(60 * time);
+            if (counter == 180) {
+                height += 50;
+                lineHeight += 50;
+                counter = 0;
+            }
         }
+    }
+
+    public void reset(){
+        height = 0;
+        lineHeight = 50;
+        counter = 0;
+    }
+
+    public void vanish(){
+        exists = false;
+        height = 0;
+        lineHeight = 0;
+        counter = 0;
     }
 }

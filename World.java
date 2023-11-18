@@ -47,7 +47,7 @@ public class World{
     public void drawWorld(Graphics g){
         //map.draw(g);
         currentRoom.draw(this, g);
-        player.draw(g);
+        player.draw(this, g);
     } // drawWorld ()
     // =====================================================================
 
