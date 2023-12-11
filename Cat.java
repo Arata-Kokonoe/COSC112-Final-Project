@@ -133,7 +133,7 @@ public class Cat implements canShoot{
         catPosition.x += catVelocity.x * time;
         for (Platform p : w.currentRoom.platforms){
             if (catHitbox.leftCollision(p.platformHitbox)){
-                catPosition.x = p.platformPosition.x - catDimensions.x;
+                catPosition.x = p.platformPosition.x - catDimensions.x; 
             }
             if (catHitbox.rightCollision(p.platformHitbox)){
                 catPosition.x = p.platformPosition.x + p.platformDimensions.x;
@@ -144,7 +144,7 @@ public class Cat implements canShoot{
         if (!this.checkCollisions(w) && catVelocity.y == 0.0){
             boolean check = false;
             for (Platform p : w.currentRoom.platforms) {
-                if (catHitbox.isOnTopOfForgiving(p.platformHitbox)) check = true;
+                if (catHitbox.isOnTopOf(p.platformHitbox)) check = true;
             }
             if (!check) catVelocity.y = 0.01;
         }
