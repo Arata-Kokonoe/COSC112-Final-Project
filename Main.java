@@ -76,7 +76,7 @@ public class Main extends JPanel implements KeyListener{
         }; //jumps
         if (c == 'j'){}; // attacks
         if (c == 'k') {
-            world.player.deadState();
+            world.player.deadState(world);
         }; // switches between dead and alive
         if (c == 'm'){}; // opens map
         if (c == 'p'){}; // opens the menus; change later to Esc if possible

@@ -200,7 +200,8 @@ public class Cat implements canShoot{
 
 
     // =====================================================================
-    public void deadState() {
+    public void deadState(World w) {
+
         try{ 
             rightSprite = ImageIO.read(new File("dead-still-right.png"));
             leftSprite = ImageIO.read(new File("dead-still-left.png"));

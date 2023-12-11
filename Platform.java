@@ -28,7 +28,7 @@ public class Platform{
 
     // =====================================================================
     public Platform(double x, double y, int repeat){
-        platformDimensions = new Pair(100, 25);
+        platformDimensions = new Pair(100*repeat, 25);
         platformPosition = new Pair(x, y);
         platformHitbox = new Hitbox(platformDimensions, platformPosition);
         this.repeat = repeat;
