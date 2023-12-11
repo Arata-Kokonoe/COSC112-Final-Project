@@ -40,15 +40,15 @@ public class Room{
         platforms = new ArrayList<Platform>();
         gas = new Gas();
         if (roomType == 0){
-            platforms.add(new Platform(0, 650, 250));
-            platforms.add(new Platform(387, 550, 250));
-            platforms.add(new Platform(774, 475, 250));
-            platforms.add(new Platform(600, 375, 70));
-            platforms.add(new Platform(450, 300, 70));
-            platforms.add(new Platform(300, 225, 70));
-            platforms.add(new Platform(0, 125, 250));
-            button = new Button(175, 100);
-            door1 = new Door(25, 50);
+            platforms.add(new Platform(0, 650, 2));
+            platforms.add(new Platform(387, 550, 2));
+            platforms.add(new Platform(774, 475, 2));
+            platforms.add(new Platform(600, 375, 2));
+            platforms.add(new Platform(450, 300, 2));
+            platforms.add(new Platform(300, 225, 3));
+            platforms.add(new Platform(0, 125, 2));
+            button = new Button(130, 110);
+            door1 = new Door(25, 53);
             
             System.out.println("Room 0 created");
         }
