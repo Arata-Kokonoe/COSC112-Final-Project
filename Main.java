@@ -75,7 +75,9 @@ public class Main extends JPanel implements KeyListener{
             }
         }; //jumps
         if (c == 'j'){}; // attacks
-        if (c == 'k'){}; // switches between dead and alive
+        if (c == 'k') {
+            world.player.deadState();
+        }; // switches between dead and alive
         if (c == 'm'){}; // opens map
         if (c == 'p'){}; // opens the menus; change later to Esc if possible
     } // keyPressed()
@@ -131,7 +133,7 @@ public class Main extends JPanel implements KeyListener{
 
     // =====================================================================
     public static void main(String[] args) {
-        JFrame frame = new JFrame("New Game");
+        JFrame frame = new JFrame("Milton Escapes");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Main mainInstance = new Main();
         frame.setContentPane(mainInstance);
@@ -146,7 +148,8 @@ public class Main extends JPanel implements KeyListener{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);        
      
-        g.setColor(Color.BLACK);
+        Color c = Color.decode("#75533d");
+        g.setColor(c);
         g.fillRect(0, 0, WIDTH, HEIGHT);
      
         world.drawWorld(g); 

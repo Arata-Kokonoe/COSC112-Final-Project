@@ -18,6 +18,7 @@ public class World{
 
     public int width;
     public int height;
+    public double time;
     public Room firstRoom;
     public Room currentRoom;
     public Cat player;
@@ -29,7 +30,6 @@ public class World{
 
     // =====================================================================
     public World(int width, int height){
-
         this.width = width;
         this.height = height;
         player = new Cat();
@@ -57,6 +57,7 @@ public class World{
     public void updateWorld(double time){
         currentRoom.update(this, time);
         player.update(this, time);
+        this.time += time;
     } // updateWorld()
     // =====================================================================
 
