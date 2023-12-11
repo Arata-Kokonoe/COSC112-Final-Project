@@ -2,7 +2,10 @@
 // IMPORTS
 
 import java.awt.Graphics;
-import java.awt.Color;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 // =========================================================================
 
 // =========================================================================
@@ -17,16 +20,24 @@ public class Platform{
     public Pair platformDimensions;
     public Pair platformPosition;
     public Hitbox platformHitbox;
-    public final Color COLOR = Color.WHITE;
+    public int repeat;
+    private BufferedImage platform;
     // =====================================================================
 
 
 
     // =====================================================================
-    public Platform(double x, double y, int width){
-        platformDimensions = new Pair(width, 40);
+    public Platform(double x, double y, int repeat){
+        platformDimensions = new Pair(100, 25);
         platformPosition = new Pair(x, y);
         platformHitbox = new Hitbox(platformDimensions, platformPosition);
+        this.repeat = repeat;
+        try {                
+            platform = ImageIO.read(new File("platform.png"));
+        } 
+        catch (IOException ex) {
+            System.out.println("Failed to find image.");
+        }
     } // Platform()
     // =====================================================================
 
@@ -34,8 +45,9 @@ public class Platform{
 
     // =====================================================================
     public void draw(Graphics g){
-        g.setColor(COLOR);
-        g.fillRect((int)platformPosition.x, (int)platformPosition.y, (int)platformDimensions.x, (int)platformDimensions.y);
+       for(int i = 0; i < repeat; i++) {
+        g.drawImage(platform, (int)(platformPosition.x + (100 * i)), (int)platformPosition.y, null);
+       }
     } // draw()
     // =====================================================================
 
