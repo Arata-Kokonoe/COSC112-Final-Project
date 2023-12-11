@@ -32,9 +32,14 @@ public class Hitbox {
 
     // =====================================================================
     public boolean topCollision(Hitbox other){
-        if ((hitboxBot > other.hitboxTop) && (hitboxBot < other.hitboxBot) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) || (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))){
+        double b_collision = other.hitboxBot - hitboxTop;
+        double t_collision = hitboxBot - other.hitboxTop;
+        double l_collision = hitboxRight - other.hitboxLeft;
+        double r_collision = other.hitboxRight - hitboxLeft;
+        if (anyCollision(other) && (t_collision < b_collision && t_collision < l_collision && t_collision < r_collision)){
             return true;
         }
+
         else return false;
     } // topCollision()
     // =====================================================================
@@ -43,9 +48,14 @@ public class Hitbox {
 
     // =====================================================================
     public boolean leftCollision(Hitbox other){
-        if ((hitboxRight >= other.hitboxLeft) && (hitboxRight <= other.hitboxRight) && (!this.isOnTopOf(other)) && (!this.isOnBotOf(other)) && ((hitboxTop > other.hitboxTop && hitboxTop < other.hitboxBot) || (hitboxBot > other.hitboxTop && hitboxBot < other.hitboxBot))){
+        double b_collision = other.hitboxBot - hitboxTop;
+        double t_collision = hitboxBot - other.hitboxTop;
+        double l_collision = hitboxRight - other.hitboxLeft;
+        double r_collision = other.hitboxRight - hitboxLeft;
+        if (anyCollision(other) && (l_collision < t_collision && l_collision < b_collision && l_collision < r_collision)){
             return true;
         }
+
         else return false;
     } // leftCollision()
     // =====================================================================
@@ -54,9 +64,14 @@ public class Hitbox {
 
     // =====================================================================
     public boolean rightCollision(Hitbox other){
-        if ((hitboxLeft <= other.hitboxRight) && (hitboxLeft >= other.hitboxLeft) && (!this.isOnTopOf(other)) && (!this.isOnBotOf(other)) && ((hitboxTop > other.hitboxTop && hitboxTop < other.hitboxBot) || (hitboxBot > other.hitboxTop && hitboxBot < other.hitboxBot))){
+        double b_collision = other.hitboxBot - hitboxTop;
+        double t_collision = hitboxBot - other.hitboxTop;
+        double l_collision = hitboxRight - other.hitboxLeft;
+        double r_collision = other.hitboxRight - hitboxLeft;
+        if (anyCollision(other) && (r_collision < t_collision && r_collision < l_collision && r_collision < b_collision)){
             return true;
         }
+
         else return false;
     } // rightCollision()
     // =====================================================================
@@ -65,22 +80,16 @@ public class Hitbox {
 
     // =====================================================================
     public boolean botCollision(Hitbox other){
-        if ((hitboxTop < other.hitboxBot) && (hitboxTop > other.hitboxTop) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) || (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))){
+        double b_collision = other.hitboxBot - hitboxTop;
+        double t_collision = hitboxBot - other.hitboxTop;
+        double l_collision = hitboxRight - other.hitboxLeft;
+        double r_collision = other.hitboxRight - hitboxLeft;
+        if (anyCollision(other) && (b_collision < t_collision && b_collision < l_collision && b_collision < r_collision)){
             return true;
         }
+        
         else return false;
     } // botCollision()
-    // =====================================================================
-
-
-
-    // =====================================================================
-    private boolean isOnTopOf(Hitbox other){
-        if ((hitboxBot >= other.hitboxTop - buffer) && (hitboxBot < other.hitboxBot) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) && (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))){
-            return true;
-        }
-        else return false;
-    } // isOnTopOf()
     // =====================================================================
 
 
@@ -97,19 +106,11 @@ public class Hitbox {
 
 
     // =====================================================================
-    private boolean isOnBotOf(Hitbox other){
-        if ((hitboxTop <= other.hitboxBot + buffer) && (hitboxTop > other.hitboxTop) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) && (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))){
+    public boolean anyCollision(Hitbox other){
+        if (hitboxLeft < other.hitboxRight && hitboxRight > other.hitboxLeft && hitboxTop < other.hitboxBot && hitboxBot > other.hitboxTop){
             return true;
         }
         else return false;
-    } // isOnBotOf
-    // =====================================================================
-
-
-
-    // =====================================================================
-    public boolean anyCollision(Hitbox other){
-        return this.botCollision(other) || this.topCollision(other) || this.leftCollision(other) || this.rightCollision(other);
     } // anyCollision()
     // =====================================================================
 

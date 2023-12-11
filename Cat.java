@@ -41,7 +41,7 @@ public class Cat implements canShoot{
     public Cat(){
         catPosition = new Pair(50.0, 615.0);
         catVelocity = new Pair(0.0, 0.01);
-        catAcceleration = new Pair(0.0, 200.0);
+        catAcceleration = new Pair(0.0, 300.0);
         catDimensions = new Pair(65.0, 40.0);
         catHitbox = new Hitbox(catDimensions, catPosition);
         lives = 3;
@@ -76,7 +76,33 @@ public class Cat implements canShoot{
 
     // =====================================================================
     public void update(World w, double time){
-        catPosition = catPosition.add(catVelocity.times(time));
+        if (catVelocity.y != 0.0) {
+            catVelocity.y = catVelocity.y + (catAcceleration.y * time);
+        }
+
+        catPosition.y += catVelocity.y * time;
+        for (Platform p : w.currentRoom.platforms){
+            if (catHitbox.topCollision(p.platformHitbox)){
+                catPosition.y = p.platformPosition.y - catDimensions.y;
+                catVelocity.y = 0.0;
+            }
+            if (catHitbox.botCollision(p.platformHitbox)){
+                catPosition.y = p.platformPosition.y + p.platformDimensions.y;
+                catVelocity.y = 0.0;
+            }
+        }
+
+        catPosition.x += catVelocity.x * time;
+        for (Platform p : w.currentRoom.platforms){
+            if (catHitbox.leftCollision(p.platformHitbox)){
+                catPosition.x = p.platformPosition.x - catDimensions.x;
+            }
+            if (catHitbox.rightCollision(p.platformHitbox)){
+                catPosition.x = p.platformPosition.x + p.platformDimensions.x;
+            }
+        }
+
+
         if (!this.checkCollisions(w) && catVelocity.y == 0.0){
             boolean check = false;
             for (Platform p : w.currentRoom.platforms) {
@@ -84,9 +110,7 @@ public class Cat implements canShoot{
             }
             if (!check) catVelocity.y = 0.01;
         }
-        if (catVelocity.y != 0.0) {
-            catVelocity.y = catVelocity.y + (catAcceleration.y * time);
-        }
+        
         if (catVelocity.x < 0.0) orientation = "left";
         else if (catVelocity.x > 0.0) orientation = "right";
         catHitbox.update(catPosition);
@@ -116,52 +140,6 @@ public class Cat implements canShoot{
         else if (catPosition.x <= 0.0){
             catPosition.x = 0.0; //checks if left side of cat has touched the left side of world
             collision = true;
-        }
-
-        for (Platform p : w.currentRoom.platforms){;
-            catHitbox.update(catPosition);
-            if (catHitbox.leftCollision(p.platformHitbox)){
-                if ((catHitbox.hitboxBot <= p.platformHitbox.hitboxTop + 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
-                    catPosition.y = p.platformPosition.y - catDimensions.y;
-                    catVelocity.y = 0.0;
-                    collision = true;
-                }
-                else if ((catHitbox.hitboxTop >= p.platformHitbox.hitboxBot - 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
-                    catPosition.y = p.platformPosition.y + p.platformDimensions.y;
-                    catVelocity.y = 0.01;
-                    collision = true;
-                }
-                else{
-                    catPosition.x = p.platformPosition.x - catDimensions.x;
-                    collision = true;
-                }
-            }
-            else if (catHitbox.rightCollision(p.platformHitbox)){
-                if ((catHitbox.hitboxBot <= p.platformHitbox.hitboxTop + 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
-                    catPosition.y = p.platformPosition.y - catDimensions.y;
-                    catVelocity.y = 0.0;
-                    collision = true;
-                }
-                else if ((catHitbox.hitboxTop >= p.platformHitbox.hitboxBot - 3) && ((catHitbox.hitboxLeft <= p.platformHitbox.hitboxLeft && catHitbox.hitboxRight >= p.platformHitbox.hitboxLeft) || (catHitbox.hitboxRight >= p.platformHitbox.hitboxRight && catHitbox.hitboxLeft <= p.platformHitbox.hitboxRight))){
-                    catPosition.y = p.platformPosition.y + p.platformDimensions.y;
-                    catVelocity.y = 0.01;
-                    collision = true;
-                }
-                else{
-                    catPosition.x = p.platformPosition.x + p.platformDimensions.x;
-                    collision = true;
-                }
-            }
-            else if (catHitbox.topCollision(p.platformHitbox)){
-                catPosition.y = p.platformPosition.y - catDimensions.y;
-                catVelocity.y = 0.0;
-                collision = true;
-            }
-            else if (catHitbox.botCollision(p.platformHitbox)){
-                catPosition.y = p.platformPosition.y + p.platformDimensions.y + 1;
-                catVelocity.y = 0.0;
-                collision = true;
-            }
         }
 
         if (catPosition.y + catDimensions.y >= w.height - w.currentRoom.gas.height) {
