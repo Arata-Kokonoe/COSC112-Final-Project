@@ -29,8 +29,14 @@ public class Cat implements canShoot{
     public Pair catDimensions;
     private BufferedImage rightSprite;
     private BufferedImage leftSprite;
-    private BufferedImage leftHalfHeartSprite;
+    private BufferedImage rightRunSprite;
+    private BufferedImage leftRunSprite;
+    private BufferedImage rightJumpSprite;
+    private BufferedImage leftJumpSprite;
+    private BufferedImage rightLandSprite;
+    private BufferedImage leftLandSprite;
     private BufferedImage rightHalfHeartSprite;
+    private BufferedImage leftHalfHeartSprite;
     public Hitbox catHitbox;
     public String orientation;
     // =====================================================================
@@ -48,10 +54,16 @@ public class Cat implements canShoot{
         orientation = "right";
 
         try {                
-            rightSprite = ImageIO.read(new File("NyanCatRight.png"));
-            leftSprite = ImageIO.read(new File("NyanCatLeft.png"));
-            leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
+            rightSprite = ImageIO.read(new File("cat-still-right.png"));
+            leftSprite = ImageIO.read(new File("cat-still-left.png"));
+            rightRunSprite = ImageIO.read(new File("cat-run-right.png"));
+            leftRunSprite = ImageIO.read(new File("cat-run-left.png"));
+            rightJumpSprite = ImageIO.read(new File("cat-jump-right.png"));
+            leftJumpSprite = ImageIO.read(new File("cat-jump-left.png"));
+            rightLandSprite = ImageIO.read(new File("cat-land-right.png"));
+            leftLandSprite = ImageIO.read(new File("cat-land-left.png"));
             rightHalfHeartSprite = ImageIO.read(new File("HalfHeartRight.png"));
+            leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
         } 
         catch (IOException ex) {
             System.out.println("Failed to find image.");
@@ -63,8 +75,28 @@ public class Cat implements canShoot{
 
     // =====================================================================
     public void draw(World w, Graphics g){
-        if (orientation.equals("left")) g.drawImage(leftSprite, (int)catPosition.x, (int)catPosition.y, null);
-        else if (orientation.equals("right")) g.drawImage(rightSprite, (int)catPosition.x, (int)catPosition.y, null);
+        if (orientation.equals("right")) {
+            if(catVelocity.y < 0) {
+                g.drawImage(rightJumpSprite, (int)catPosition.x, (int)catPosition.y, null);
+            }
+            else if(catVelocity.y > 0) {
+                g.drawImage(rightLandSprite, (int)catPosition.x, (int)catPosition.y, null);
+            }
+            else {
+                g.drawImage(rightSprite, (int)catPosition.x, (int)catPosition.y, null);
+            }
+        }
+        if (orientation.equals("left")) {
+            if(catVelocity.y < 0) {
+                g.drawImage(leftJumpSprite, (int)catPosition.x, (int)catPosition.y, null);
+            }
+            else if(catVelocity.y > 0) {
+                g.drawImage(leftLandSprite, (int)catPosition.x, (int)catPosition.y, null);
+            }
+            else {
+                g.drawImage(leftSprite, (int)catPosition.x, (int)catPosition.y, null);
+            }
+        }
         for (double i = 0; i < lives; i += 0.5){
             if(i % 1 != 0) g.drawImage(rightHalfHeartSprite, (int)(w.width - (90 - (30 * (i - 0.5)))), 0, null);
             else if (i % 1 == 0) g.drawImage(leftHalfHeartSprite, (int)(w.width - (90 - (30 * i))), 0, null);
@@ -161,6 +193,25 @@ public class Cat implements canShoot{
 
 
 
+    // =====================================================================
+    public void deadState() {
+        try{ 
+            rightSprite = ImageIO.read(new File("dead-still-right.png"));
+            leftSprite = ImageIO.read(new File("dead-still-left.png"));
+            rightJumpSprite = ImageIO.read(new File("dead-jump-right.png"));
+            leftJumpSprite = ImageIO.read(new File("dead-jump-left.png"));
+            rightLandSprite = ImageIO.read(new File("dead-land-right.png"));
+            leftLandSprite = ImageIO.read(new File("dead-land-left.png"));
+        }
+        catch (IOException ex) {
+            System.out.println("Failed to find image.");
+        }      
+    }
+    // deadState()
+    // =====================================================================
+
+
+    
     // =====================================================================
     public void shoot(){
 
