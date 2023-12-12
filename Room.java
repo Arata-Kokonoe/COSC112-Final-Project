@@ -28,6 +28,7 @@ public class Room{
      */
     public ArrayList<Platform> platforms; // all of the platforms in the room
     public ArrayList<Door> doors;
+    public ArrayList<Projectile> projectiles;
     public Button button;
     public Gas gas;
     public Room prev;
@@ -52,6 +53,7 @@ public class Room{
             System.out.println("Failed to find image.");
         }
         this.roomType = roomType;
+        projectiles = new ArrayList<Projectile>();
         platforms = new ArrayList<Platform>();
         doors = new ArrayList<Door>();
         gas = new Gas();
@@ -163,8 +165,11 @@ public class Room{
             e.draw(g);
         } */
         for (Door d : doors){
-            if (d != null) d.draw(w, g);
+            d.draw(g);
         } 
+        for (Projectile p : projectiles){
+            p.draw(g);
+        }
         gas.draw(w, g);
     } // draw()
     // =====================================================================
@@ -174,6 +179,9 @@ public class Room{
     // =====================================================================
     public void update(World w, double time){
         gas.update(time);
+        for(Projectile p: projectiles){
+            p.update(w, time);
+        }
     } // update()
     // =====================================================================
 

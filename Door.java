@@ -50,7 +50,7 @@ public class Door {
 
 
     // =====================================================================
-    public void draw(World w, Graphics g){
+    public void draw(Graphics g){
         if (unlocked) g.drawImage(openDoor, (int)doorPosition.x, (int)doorPosition.y, null);
         else g.drawImage(closedDoor, (int)doorPosition.x, (int)doorPosition.y, null);
     } // draw()
