@@ -145,7 +145,9 @@ public class Room{
     // =====================================================================
     public void draw(World w, Graphics g){
         g.drawImage(wall1, 0, 0, null);
-        g.drawImage(line, 0, w.height - gas.lineHeight - line.getHeight()/2, null);
+        if((w.time % 1) > 0.5) {
+            g.drawImage(line, 0, w.height - gas.lineHeight - line.getHeight()/2, null);
+        }
         for (Platform p : platforms){
             p.draw(g);
         }
