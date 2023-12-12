@@ -151,10 +151,9 @@ public class Main extends JPanel implements KeyListener{
 
     // =====================================================================
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);        
+        super.paintComponent(g);
      
-        Color c = Color.decode("#75533d");
-        g.setColor(c);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
      
         world.drawWorld(g); 
