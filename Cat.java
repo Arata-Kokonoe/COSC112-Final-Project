@@ -29,8 +29,10 @@ public class Cat implements canShoot{
     public Pair catDimensions;
     private BufferedImage rightSprite;
     private BufferedImage leftSprite;
-    private BufferedImage rightRunSprite;
-    private BufferedImage leftRunSprite;
+    private BufferedImage rightRunSprite1;
+    private BufferedImage rightRunSprite2;
+    private BufferedImage leftRunSprite1;
+    private BufferedImage leftRunSprite2;
     private BufferedImage rightJumpSprite;
     private BufferedImage leftJumpSprite;
     private BufferedImage rightLandSprite;
@@ -56,8 +58,10 @@ public class Cat implements canShoot{
         try {                
             rightSprite = ImageIO.read(new File("cat-still-right.png"));
             leftSprite = ImageIO.read(new File("cat-still-left.png"));
-            rightRunSprite = ImageIO.read(new File("cat-run-right.png"));
-            leftRunSprite = ImageIO.read(new File("cat-run-left.png"));
+            rightRunSprite1 = ImageIO.read(new File("cat-run-right-1.png"));
+            rightRunSprite2 = ImageIO.read(new File("cat-run-right-2.png"));
+            leftRunSprite1 = ImageIO.read(new File("cat-run-left-1.png"));
+            leftRunSprite2 = ImageIO.read(new File("cat-run-left-2.png"));
             rightJumpSprite = ImageIO.read(new File("cat-jump-right.png"));
             leftJumpSprite = ImageIO.read(new File("cat-jump-left.png"));
             rightLandSprite = ImageIO.read(new File("cat-land-right.png"));
@@ -77,7 +81,11 @@ public class Cat implements canShoot{
     public void draw(World w, Graphics g){
         if (orientation.equals("right")) {
             if((catVelocity.x > 0) && ((((w.time % 1) > 0.25) && ((w.time % 1) < 0.5)) || ((w.time % 1) > 0.75)) && (catVelocity.y == 0)) {
-                g.drawImage(rightRunSprite, (int)catPosition.x, (int)catPosition.y, null);
+                g.drawImage(rightRunSprite1, (int)catPosition.x, (int)catPosition.y, null);
+            }
+            else if((catVelocity.x > 0) && ((((w.time % 1) > 0.5) && ((w.time % 1) < 0.75)) || ((w.time % 1) < 0.25)) && (catVelocity.y == 0)) {
+                g.drawImage(rightRunSprite2, (int)catPosition.x, (int)catPosition.y, null);
+
             }
             else if(catVelocity.y < 0) {
                 g.drawImage(rightJumpSprite, (int)catPosition.x, (int)catPosition.y, null);
@@ -91,7 +99,10 @@ public class Cat implements canShoot{
         }
         if (orientation.equals("left")) {
             if((catVelocity.x < 0) && ((((w.time % 1) > 0.25) && ((w.time % 1) < 0.5)) || ((w.time % 1) > 0.75)) && (catVelocity.y == 0)) {
-                g.drawImage(leftRunSprite, (int)catPosition.x, (int)catPosition.y, null);
+                g.drawImage(leftRunSprite1, (int)catPosition.x, (int)catPosition.y, null);
+            }
+            else if((catVelocity.x < 0) && ((((w.time % 1) > 0.5) && ((w.time % 1) < 0.75)) || ((w.time % 1) < 0.25)) && (catVelocity.y == 0)) {
+                g.drawImage(leftRunSprite2, (int)catPosition.x, (int)catPosition.y, null);
             }
             else if(catVelocity.y < 0) {
                 g.drawImage(leftJumpSprite, (int)catPosition.x, (int)catPosition.y, null);
