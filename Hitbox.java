@@ -95,7 +95,7 @@ public class Hitbox {
 
 
     // =====================================================================
-    public boolean isOnTopOfForgiving(Hitbox other){
+    public boolean isOnTopOf(Hitbox other){
         if ((hitboxBot >= other.hitboxTop - buffer) && (hitboxBot < other.hitboxBot) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) || (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))){
             return true;
         }

@@ -133,7 +133,7 @@ public class Cat implements canShoot{
         catPosition.x += catVelocity.x * time;
         for (Platform p : w.currentRoom.platforms){
             if (catHitbox.leftCollision(p.platformHitbox)){
-                catPosition.x = p.platformPosition.x - catDimensions.x;
+                catPosition.x = p.platformPosition.x - catDimensions.x; 
             }
             if (catHitbox.rightCollision(p.platformHitbox)){
                 catPosition.x = p.platformPosition.x + p.platformDimensions.x;
@@ -144,7 +144,7 @@ public class Cat implements canShoot{
         if (!this.checkCollisions(w) && catVelocity.y == 0.0){
             boolean check = false;
             for (Platform p : w.currentRoom.platforms) {
-                if (catHitbox.isOnTopOfForgiving(p.platformHitbox)) check = true;
+                if (catHitbox.isOnTopOf(p.platformHitbox)) check = true;
             }
             if (!check) catVelocity.y = 0.01;
         }
@@ -191,7 +191,32 @@ public class Cat implements canShoot{
             w.currentRoom.button.pressed = true;
             if(w.currentRoom.door1 != null) w.currentRoom.door1.unlocked = true;
             if(w.currentRoom.door2 != null) w.currentRoom.door2.unlocked = true;
+            if(w.currentRoom.backDoor != null) w.currentRoom.backDoor.unlocked = true;
             w.currentRoom.gas.vanish();
+        }
+
+        if (w.currentRoom.door1 != null && catHitbox.anyCollision(w.currentRoom.door1.doorHitbox) && w.currentRoom.door1.unlocked){
+            if (w.currentRoom.next1 == null) {
+                w.addRoom(1);
+                catPosition = new Pair(50.0, 615.0);
+            }
+            else {
+                w.currentRoom = w.currentRoom.next1;
+                catPosition = new Pair(50.0, 615.0);
+            }
+        }
+        if (w.currentRoom.door2 != null && catHitbox.anyCollision(w.currentRoom.door2.doorHitbox) && w.currentRoom.door2.unlocked){
+            if (w.currentRoom.next2 == null) {
+                w.addRoom(2);
+                catPosition = new Pair(50.0, 615.0);
+            }
+            else {
+                w.currentRoom = w.currentRoom.next2;
+                catPosition = new Pair(50.0, 615.0);
+            }
+        }
+        if (w.currentRoom.backDoor != null && catHitbox.anyCollision(w.currentRoom.backDoor.doorHitbox) && w.currentRoom.backDoor.unlocked){
+            w.currentRoom = w.currentRoom.prev;
         }
         return collision;
     } // checkCollisions()

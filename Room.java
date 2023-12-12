@@ -34,6 +34,7 @@ public class Room{
     public Room next2;
     public Door door1;
     public Door door2;
+    public Door backDoor;
     private BufferedImage wall1;
     private BufferedImage line;
     // =====================================================================
@@ -54,7 +55,7 @@ public class Room{
             platforms.add(new Platform(300, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            door1 = new Door(25, 53);
+            door1 = new Door(25, 53, 1);
 
             try {                
                 wall1 = ImageIO.read(new File("wall.png"));
@@ -64,19 +65,72 @@ public class Room{
                 System.out.println("Failed to find image.");
             }
             
-            System.out.println("Room 0 created");
+            System.out.println("Room Type 0 created");
         }
         else if (roomType == 1){
+            platforms.add(new Platform(0, 650, 2));
+            platforms.add(new Platform(375, 550, 2));
+            platforms.add(new Platform(775, 475, 2));
+            platforms.add(new Platform(600, 375, 2));
+            platforms.add(new Platform(450, 300, 2));
+            platforms.add(new Platform(300, 225, 2));
+            platforms.add(new Platform(0, 125, 2));
+            button = new Button(130, 110);
+            door1 = new Door(25, 53, 1);
 
+            System.out.println("Room Type 1 created");
         }
         else if (roomType == 2){
+            platforms.add(new Platform(0, 650, 2));
+            platforms.add(new Platform(375, 550, 2));
+            platforms.add(new Platform(775, 475, 2));
+            platforms.add(new Platform(600, 375, 2));
+            platforms.add(new Platform(450, 300, 2));
+            platforms.add(new Platform(300, 225, 2));
+            platforms.add(new Platform(0, 125, 2));
+            button = new Button(130, 110);
+            door1 = new Door(25, 53, 1);
 
+            System.out.println("Room Type 2 created");
         }
         else if (roomType == 3){
+            platforms.add(new Platform(0, 650, 2));
+            platforms.add(new Platform(375, 550, 2));
+            platforms.add(new Platform(775, 475, 2));
+            platforms.add(new Platform(600, 375, 2));
+            platforms.add(new Platform(450, 300, 2));
+            platforms.add(new Platform(300, 225, 2));
+            platforms.add(new Platform(0, 125, 2));
+            button = new Button(130, 110);
+            door1 = new Door(25, 53, 1);
 
+            System.out.println("Room Type 3 created");
         }
         else if (roomType == 4){
+            platforms.add(new Platform(0, 650, 2));
+            platforms.add(new Platform(375, 550, 2));
+            platforms.add(new Platform(775, 475, 2));
+            platforms.add(new Platform(600, 375, 2));
+            platforms.add(new Platform(450, 300, 2));
+            platforms.add(new Platform(300, 225, 2));
+            platforms.add(new Platform(0, 125, 2));
+            button = new Button(130, 110);
+            door1 = new Door(25, 53, 1);
 
+            System.out.println("Room Type 4 created");
+        }
+        else if (roomType == 5){
+            platforms.add(new Platform(0, 650, 2));
+            platforms.add(new Platform(375, 550, 2));
+            platforms.add(new Platform(775, 475, 2));
+            platforms.add(new Platform(600, 375, 2));
+            platforms.add(new Platform(450, 300, 2));
+            platforms.add(new Platform(300, 225, 2));
+            platforms.add(new Platform(0, 125, 2));
+            button = new Button(130, 110);
+            door1 = new Door(25, 53, 1);
+
+            System.out.println("Room Type 5 created");
         }
     } // Room()
     // =====================================================================

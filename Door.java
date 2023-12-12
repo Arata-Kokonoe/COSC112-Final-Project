@@ -20,16 +20,18 @@ public class Door {
     // DATA MEMBERS
 
     public Pair doorPosition;
+    public int doorType; //0 = backdoor, 1 = left door, 2 = right door
     private BufferedImage openDoor;
     private BufferedImage closedDoor;
     public Pair doorDimensions;
     public boolean unlocked;
+    public Hitbox doorHitbox;
     // =====================================================================
 
 
 
     // =====================================================================
-    public Door(double x, double y){
+    public Door(double x, double y, int type){
         doorPosition = new Pair(x, y);
         unlocked = false;
         try {                
@@ -40,6 +42,8 @@ public class Door {
             System.out.println("Failed to find image.");
         }
         doorDimensions = new Pair(openDoor.getWidth(), openDoor.getHeight());
+        this.doorType = type;
+        doorHitbox = new Hitbox(doorDimensions, doorPosition);
     } // Door()
     // =====================================================================
 
