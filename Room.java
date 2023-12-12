@@ -35,7 +35,7 @@ public class Room{
     public Door door1;
     public Door door2;
     public Door backDoor;
-    private BufferedImage wall1;
+    private BufferedImage wall;
     private BufferedImage line;
     // =====================================================================
 
@@ -44,22 +44,22 @@ public class Room{
     // =====================================================================
     public Room(int roomType){
         try {                
-                wall1 = ImageIO.read(new File("wall.png"));
+                wall = ImageIO.read(new File("wall-1.png"));
                 line = ImageIO.read(new File("line.png"));
-            } 
-            catch (IOException ex) {
-                System.out.println("Failed to find image.");
-            }
+        } 
+        catch (IOException ex) {
+            System.out.println("Failed to find image.");
+        }
         this.roomType = roomType;
         platforms = new ArrayList<Platform>();
         gas = new Gas();
         if (roomType == 0){
-            platforms.add(new Platform(0, 650, 3));
-            platforms.add(new Platform(375, 550, 2));
-            platforms.add(new Platform(775, 475, 2));
-            platforms.add(new Platform(600, 375, 2));
-            platforms.add(new Platform(450, 300, 2));
-            platforms.add(new Platform(300, 225, 2));
+            platforms.add(new Platform(0, 675, 11));
+            platforms.add(new Platform(400, 575, 2));
+            platforms.add(new Platform(775, 475, 3));
+            platforms.add(new Platform(550, 375, 2));
+            platforms.add(new Platform(400, 300, 2));
+            platforms.add(new Platform(250, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
@@ -67,6 +67,12 @@ public class Room{
             System.out.println("Room Type 0 created");
         }
         else if (roomType == 1){
+            try {                
+                wall = ImageIO.read(new File("wall-2.png"));
+            } 
+            catch (IOException ex) {
+                System.out.println("Failed to find image.");
+            }
             platforms.add(new Platform(0, 650, 2));
             platforms.add(new Platform(375, 550, 2));
             platforms.add(new Platform(775, 475, 2));
@@ -144,7 +150,7 @@ public class Room{
 
     // =====================================================================
     public void draw(World w, Graphics g){
-        g.drawImage(wall1, 0, 0, null);
+        g.drawImage(wall, 0, 0, null);
         if((w.time % 1) > 0.5) {
             g.drawImage(line, 0, w.height - gas.lineHeight - line.getHeight()/2, null);
         }
