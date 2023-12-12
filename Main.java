@@ -80,7 +80,9 @@ public class Main extends JPanel implements KeyListener{
             world.player.shoot(world);
         }; // attacks
         if (c == 'k'){
-            world.player.deadState();
+            if(world.player.state == true) {
+                world.player.state(world.time);
+            }
         }; // switches between dead and alive
         if (c == 'm'){}; // opens map
         if (c == 'p'){}; // opens the menus; change later to Esc if possible

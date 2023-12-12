@@ -58,26 +58,8 @@ public class Cat{
         lives = 3;
         attackRange = 100;
         orientation = "right";
-
-        try {                
-            rightSprite = ImageIO.read(new File("cat-still-right.png"));
-            leftSprite = ImageIO.read(new File("cat-still-left.png"));
-            rightRunSprite1 = ImageIO.read(new File("cat-run-right-1.png"));
-            rightRunSprite2 = ImageIO.read(new File("cat-run-right-2.png"));
-            leftRunSprite1 = ImageIO.read(new File("cat-run-left-1.png"));
-            leftRunSprite2 = ImageIO.read(new File("cat-run-left-2.png"));
-            rightJumpSprite = ImageIO.read(new File("cat-jump-right.png"));
-            leftJumpSprite = ImageIO.read(new File("cat-jump-left.png"));
-            rightLandSprite = ImageIO.read(new File("cat-land-right.png"));
-            leftLandSprite = ImageIO.read(new File("cat-land-left.png"));
-            rightHalfHeartSprite = ImageIO.read(new File("HalfHeartRight.png"));
-            leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
-            leftAttackSprite = ImageIO.read(new File("catScratchLeft.png"));
-            rightAttackSprite = ImageIO.read(new File("catScratchRight.png"));
-        } 
-        catch (IOException ex) {
-            System.out.println("Failed to find image.");
-        }
+        stateCD = 0.0;
+        state = true;
     } // Cat()
     // =====================================================================
 
@@ -85,14 +67,50 @@ public class Cat{
 
     // =====================================================================
     public void draw(World w, Graphics g){
+        System.out.println(w.time - stateCD);
+        if((stateCD != 0) && ((w.time - stateCD) < 10)) {
+            try{ 
+                rightSprite = ImageIO.read(new File("dead-still-right.png"));
+                leftSprite = ImageIO.read(new File("dead-still-left.png"));
+                rightRunSprite1 = ImageIO.read(new File("dead-run-right-1.png"));
+                rightRunSprite2 = ImageIO.read(new File("dead-run-right-2.png"));
+                leftRunSprite1 = ImageIO.read(new File("dead-run-left-1.png"));
+                leftRunSprite2 = ImageIO.read(new File("dead-run-left-2.png"));
+                rightJumpSprite = ImageIO.read(new File("dead-jump-right.png"));
+                leftJumpSprite = ImageIO.read(new File("dead-jump-left.png"));
+                rightLandSprite = ImageIO.read(new File("dead-land-right.png"));
+                leftLandSprite = ImageIO.read(new File("dead-land-left.png"));
+            }
+            catch (IOException ex) {
+                System.out.println("Failed to find image.");
+            } 
+        }
+        else {
+            try {                
+                rightSprite = ImageIO.read(new File("cat-still-right.png"));
+                leftSprite = ImageIO.read(new File("cat-still-left.png"));
+                rightRunSprite1 = ImageIO.read(new File("cat-run-right-1.png"));
+                rightRunSprite2 = ImageIO.read(new File("cat-run-right-2.png"));
+                leftRunSprite1 = ImageIO.read(new File("cat-run-left-1.png"));
+                leftRunSprite2 = ImageIO.read(new File("cat-run-left-2.png"));
+                rightJumpSprite = ImageIO.read(new File("cat-jump-right.png"));
+                leftJumpSprite = ImageIO.read(new File("cat-jump-left.png"));
+                rightLandSprite = ImageIO.read(new File("cat-land-right.png"));
+                leftLandSprite = ImageIO.read(new File("cat-land-left.png"));
+                rightHalfHeartSprite = ImageIO.read(new File("HalfHeartRight.png"));
+                leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
+            } 
+            catch (IOException ex) {
+                System.out.println("Failed to find image.");
+            }
+        }
+
         if (orientation.equals("right")) {
             if((catVelocity.x > 0) && ((((w.time % 1) > (0.125)) && ((w.time % 1) < (0.25))) || (((w.time % 1) > (0.375)) && ((w.time % 1) < (0.5))) || (((w.time % 1) > (0.625)) && ((w.time % 1) < (0.75))) || ((w.time % 1) > (0.875))) && (catVelocity.y == 0)) {
                 g.drawImage(rightRunSprite1, (int)catPosition.x, (int)catPosition.y, null);
             }
             else if((catVelocity.x > 0) && (((w.time % 1) < (0.125)) || (((w.time % 1) > (0.25)) && ((w.time % 1) < (0.375)))  || (((w.time % 1) > (0.5)) && ((w.time % 1) < (0.625))) || (((w.time % 1) > (0.75)) && ((w.time % 1) < (0.875)))) && (catVelocity.y == 0)) {
                 g.drawImage(rightRunSprite2, (int)catPosition.x, (int)catPosition.y, null);
-                System.out.println("bye");
-
             }
             else if(catVelocity.y < 0) {
                 g.drawImage(rightJumpSprite, (int)catPosition.x, (int)catPosition.y, null);
@@ -169,6 +187,12 @@ public class Cat{
         
         if (catVelocity.x < 0.0) orientation = "left";
         else if (catVelocity.x > 0.0) orientation = "right";
+
+
+        if(w.time > (stateCD + 25)) {
+            state = true;
+        }
+        
         catHitbox.update(catPosition);
     } // update()
     // =====================================================================
@@ -256,24 +280,10 @@ public class Cat{
 
 
     // =====================================================================
-    public void deadState() {
-        try{ 
-            rightSprite = ImageIO.read(new File("dead-still-right.png"));
-            leftSprite = ImageIO.read(new File("dead-still-left.png"));
-            rightRunSprite1 = ImageIO.read(new File("dead-run-right-1.png"));
-            rightRunSprite2 = ImageIO.read(new File("dead-run-right-2.png"));
-            leftRunSprite1 = ImageIO.read(new File("dead-run-left-1.png"));
-            leftRunSprite2 = ImageIO.read(new File("dead-run-left-2.png"));
-            rightJumpSprite = ImageIO.read(new File("dead-jump-right.png"));
-            leftJumpSprite = ImageIO.read(new File("dead-jump-left.png"));
-            rightLandSprite = ImageIO.read(new File("dead-land-right.png"));
-            leftLandSprite = ImageIO.read(new File("dead-land-left.png"));
-        }
-        catch (IOException ex) {
-            System.out.println("Failed to find image.");
-        }      
-    }
-    // deadState()
+    public void state(double time) {
+        stateCD = time;
+        state = false;
+    } // state()
     // =====================================================================
 
 
