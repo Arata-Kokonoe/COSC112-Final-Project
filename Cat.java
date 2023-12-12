@@ -80,11 +80,12 @@ public class Cat implements canShoot{
     // =====================================================================
     public void draw(World w, Graphics g){
         if (orientation.equals("right")) {
-            if((catVelocity.x > 0) && ((((w.time % 1) > 0.25) && ((w.time % 1) < 0.5)) || ((w.time % 1) > 0.75)) && (catVelocity.y == 0)) {
+            if((catVelocity.x > 0) && ((((w.time % 1) > (0.125)) && ((w.time % 1) < (0.25))) || (((w.time % 1) > (0.375)) && ((w.time % 1) < (0.5))) || (((w.time % 1) > (0.625)) && ((w.time % 1) < (0.75))) || ((w.time % 1) > (0.875))) && (catVelocity.y == 0)) {
                 g.drawImage(rightRunSprite1, (int)catPosition.x, (int)catPosition.y, null);
             }
-            else if((catVelocity.x > 0) && ((((w.time % 1) > 0.5) && ((w.time % 1) < 0.75)) || ((w.time % 1) < 0.25)) && (catVelocity.y == 0)) {
+            else if((catVelocity.x > 0) && (((w.time % 1) < (0.125)) || (((w.time % 1) > (0.25)) && ((w.time % 1) < (0.375)))  || (((w.time % 1) > (0.5)) && ((w.time % 1) < (0.625))) || (((w.time % 1) > (0.75)) && ((w.time % 1) < (0.875)))) && (catVelocity.y == 0)) {
                 g.drawImage(rightRunSprite2, (int)catPosition.x, (int)catPosition.y, null);
+                System.out.println("bye");
 
             }
             else if(catVelocity.y < 0) {
@@ -98,10 +99,10 @@ public class Cat implements canShoot{
             }
         }
         if (orientation.equals("left")) {
-            if((catVelocity.x < 0) && ((((w.time % 1) > 0.25) && ((w.time % 1) < 0.5)) || ((w.time % 1) > 0.75)) && (catVelocity.y == 0)) {
+            if((catVelocity.x < 0) && ((((w.time % 1) > (0.125)) && ((w.time % 1) < (0.25))) || (((w.time % 1) > (0.375)) && ((w.time % 1) < (0.5))) || (((w.time % 1) > (0.625)) && ((w.time % 1) < (0.75))) || ((w.time % 1) > (0.875))) && (catVelocity.y == 0)) {
                 g.drawImage(leftRunSprite1, (int)catPosition.x, (int)catPosition.y, null);
             }
-            else if((catVelocity.x < 0) && ((((w.time % 1) > 0.5) && ((w.time % 1) < 0.75)) || ((w.time % 1) < 0.25)) && (catVelocity.y == 0)) {
+            else if((catVelocity.x < 0) && (((w.time % 1) < (0.125)) || (((w.time % 1) > (0.25)) && ((w.time % 1) < (0.375)))  || (((w.time % 1) > (0.5)) && ((w.time % 1) < (0.625))) || (((w.time % 1) > (0.75)) && ((w.time % 1) < (0.875)))) && (catVelocity.y == 0)) {
                 g.drawImage(leftRunSprite2, (int)catPosition.x, (int)catPosition.y, null);
             }
             else if(catVelocity.y < 0) {
@@ -247,6 +248,10 @@ public class Cat implements canShoot{
         try{ 
             rightSprite = ImageIO.read(new File("dead-still-right.png"));
             leftSprite = ImageIO.read(new File("dead-still-left.png"));
+            rightRunSprite1 = ImageIO.read(new File("dead-run-right-1.png"));
+            rightRunSprite2 = ImageIO.read(new File("dead-run-right-2.png"));
+            leftRunSprite1 = ImageIO.read(new File("dead-run-left-1.png"));
+            leftRunSprite2 = ImageIO.read(new File("dead-run-left-2.png"));
             rightJumpSprite = ImageIO.read(new File("dead-jump-right.png"));
             leftJumpSprite = ImageIO.read(new File("dead-jump-left.png"));
             rightLandSprite = ImageIO.read(new File("dead-land-right.png"));
