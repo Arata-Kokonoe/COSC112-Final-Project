@@ -198,24 +198,30 @@ public class Cat implements canShoot{
         if (w.currentRoom.door1 != null && catHitbox.anyCollision(w.currentRoom.door1.doorHitbox) && w.currentRoom.door1.unlocked){
             if (w.currentRoom.next1 == null) {
                 w.addRoom(1);
-                catPosition = new Pair(50.0, 615.0);
+                catPosition = new Pair(100.0, 620.0);
             }
             else {
                 w.currentRoom = w.currentRoom.next1;
-                catPosition = new Pair(50.0, 615.0);
+                catPosition = new Pair(100.0, 620.0);
             }
         }
         if (w.currentRoom.door2 != null && catHitbox.anyCollision(w.currentRoom.door2.doorHitbox) && w.currentRoom.door2.unlocked){
             if (w.currentRoom.next2 == null) {
                 w.addRoom(2);
-                catPosition = new Pair(50.0, 615.0);
+                catPosition = new Pair(100.0, 620.0);
             }
             else {
                 w.currentRoom = w.currentRoom.next2;
-                catPosition = new Pair(50.0, 615.0);
+                catPosition = new Pair(100.0, 620.0);
             }
         }
         if (w.currentRoom.backDoor != null && catHitbox.anyCollision(w.currentRoom.backDoor.doorHitbox) && w.currentRoom.backDoor.unlocked){
+            if(w.currentRoom == w.currentRoom.prev.next1){
+                catPosition = new Pair(100.0, 60.0);
+            }
+            else if (w.currentRoom == w.currentRoom.prev.next2){
+                catPosition = new Pair(950.0, 50.0);
+            }
             w.currentRoom = w.currentRoom.prev;
         }
         return collision;
