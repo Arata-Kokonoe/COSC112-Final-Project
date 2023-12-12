@@ -37,6 +37,8 @@ public class Cat implements canShoot{
     private BufferedImage leftLandSprite;
     private BufferedImage rightHalfHeartSprite;
     private BufferedImage leftHalfHeartSprite;
+    private BufferedImage leftAttackSprite;
+    private BufferedImage rightAttackSprite;
     public Hitbox catHitbox;
     public String orientation;
     // =====================================================================
@@ -64,6 +66,8 @@ public class Cat implements canShoot{
             leftLandSprite = ImageIO.read(new File("cat-land-left.png"));
             rightHalfHeartSprite = ImageIO.read(new File("HalfHeartRight.png"));
             leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
+            leftAttackSprite = ImageIO.read(new File("cat-attack-left.png"));
+            rightAttackSprite = ImageIO.read(new File("cat-attack-right.png"));
         } 
         catch (IOException ex) {
             System.out.println("Failed to find image.");
@@ -189,40 +193,47 @@ public class Cat implements canShoot{
 
         if (catHitbox.anyCollision(w.currentRoom.button.buttonHitbox)){
             w.currentRoom.button.pressed = true;
-            if(w.currentRoom.door1 != null) w.currentRoom.door1.unlocked = true;
-            if(w.currentRoom.door2 != null) w.currentRoom.door2.unlocked = true;
-            if(w.currentRoom.backDoor != null) w.currentRoom.backDoor.unlocked = true;
+            for (Door d : w.currentRoom.doors){
+                d.unlocked = true;
+            }
             w.currentRoom.gas.vanish();
         }
 
-        if (w.currentRoom.door1 != null && catHitbox.anyCollision(w.currentRoom.door1.doorHitbox) && w.currentRoom.door1.unlocked){
-            if (w.currentRoom.next1 == null) {
-                w.addRoom(1);
-                catPosition = new Pair(100.0, 620.0);
+
+        if(w.currentRoom.button.pressed){
+            for (Door d : w.currentRoom.doors){
+                if(catHitbox.anyCollision(d.doorHitbox)){
+                    if(d.doorType == 0){
+                        if(w.currentRoom == w.currentRoom.prev.next1){
+                            catPosition = new Pair(100.0, 60.0);
+                        }
+                        else if (w.currentRoom == w.currentRoom.prev.next2){
+                            catPosition = new Pair(950.0, 50.0);
+                        }
+                        w.currentRoom = w.currentRoom.prev;
+                    }
+                    else if (d.doorType == 1){
+                        if (w.currentRoom.next1 == null) {
+                            w.addRoom(1);
+                            catPosition = new Pair(100.0, 620.0);
+                        }
+                        else {
+                            w.currentRoom = w.currentRoom.next1;
+                            catPosition = new Pair(100.0, 620.0);
+                        }
+                    }
+                    else if (d.doorType == 2){
+                        if (w.currentRoom.next2 == null) {
+                            w.addRoom(2);
+                            catPosition = new Pair(100.0, 620.0);
+                        }
+                        else {
+                            w.currentRoom = w.currentRoom.next2;
+                            catPosition = new Pair(100.0, 620.0);
+                        }
+                    }
+                }
             }
-            else {
-                w.currentRoom = w.currentRoom.next1;
-                catPosition = new Pair(100.0, 620.0);
-            }
-        }
-        if (w.currentRoom.door2 != null && catHitbox.anyCollision(w.currentRoom.door2.doorHitbox) && w.currentRoom.door2.unlocked){
-            if (w.currentRoom.next2 == null) {
-                w.addRoom(2);
-                catPosition = new Pair(100.0, 620.0);
-            }
-            else {
-                w.currentRoom = w.currentRoom.next2;
-                catPosition = new Pair(100.0, 620.0);
-            }
-        }
-        if (w.currentRoom.backDoor != null && catHitbox.anyCollision(w.currentRoom.backDoor.doorHitbox) && w.currentRoom.backDoor.unlocked){
-            if(w.currentRoom == w.currentRoom.prev.next1){
-                catPosition = new Pair(100.0, 60.0);
-            }
-            else if (w.currentRoom == w.currentRoom.prev.next2){
-                catPosition = new Pair(950.0, 50.0);
-            }
-            w.currentRoom = w.currentRoom.prev;
         }
         return collision;
     } // checkCollisions()
@@ -252,6 +263,7 @@ public class Cat implements canShoot{
     
     // =====================================================================
     public void shoot(){
+        
 
     } // shoot()
     // =====================================================================
