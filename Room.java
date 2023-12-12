@@ -27,6 +27,7 @@ public class Room{
      * Different number ranges = different difficulties (i.e. 1-5 is easy rooms, 6-10 is medium, 11-15 is hard, etc.)
      */
     public ArrayList<Platform> platforms; // all of the platforms in the room
+    public ArrayList<Door> doors;
     public Button button;
     public Gas gas;
     public Room prev;
@@ -52,6 +53,7 @@ public class Room{
         }
         this.roomType = roomType;
         platforms = new ArrayList<Platform>();
+        doors = new ArrayList<Door>();
         gas = new Gas();
         if (roomType == 0){
             platforms.add(new Platform(0, 675, 11));
@@ -62,7 +64,7 @@ public class Room{
             platforms.add(new Platform(250, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            door1 = new Door(25, 53, 1);
+            doors.add(new Door(25, 53, 1));
             
             System.out.println("Room Type 0 created");
         }
@@ -81,8 +83,8 @@ public class Room{
             platforms.add(new Platform(300, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            door1 = new Door(25, 53, 1);
-            backDoor = new Door(25, 615, 0);
+            doors.add(new Door(25, 53, 1));
+            doors.add(new Door (25, 578, 0));
             
             System.out.println("Room Type 1 created");
         }
@@ -95,8 +97,8 @@ public class Room{
             platforms.add(new Platform(300, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            door1 = new Door(25, 53, 1);
-            backDoor = new Door(25, 575, 0);
+            doors.add(new Door(25, 53, 1));
+            doors.add(new Door (25, 578, 0));
 
             System.out.println("Room Type 2 created");
         }
@@ -109,9 +111,8 @@ public class Room{
             platforms.add(new Platform(300, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            door1 = new Door(25, 53, 1);
-            backDoor = new Door(25, 575, 0);
-
+            doors.add(new Door(25, 53, 1));
+            doors.add(new Door (25, 578, 0));
             System.out.println("Room Type 3 created");
         }
         else if (roomType == 4){
@@ -123,8 +124,8 @@ public class Room{
             platforms.add(new Platform(300, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            door1 = new Door(25, 53, 1);
-            backDoor = new Door(25, 575, 0);
+            doors.add(new Door(25, 53, 1));
+            doors.add(new Door (25, 578, 0));
 
             System.out.println("Room Type 4 created");
         }
@@ -137,8 +138,8 @@ public class Room{
             platforms.add(new Platform(300, 225, 2));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            door1 = new Door(25, 53, 1);
-            backDoor = new Door(25, 575, 0);
+            doors.add(new Door(25, 53, 1));
+            doors.add(new Door (25, 578, 0));
 
             System.out.println("Room Type 5 created");
         }
@@ -158,15 +159,12 @@ public class Room{
             p.draw(g);
         }
         button.draw(w, g);
-        if(door1 != null) door1.draw(w, g);
-        if(door2 != null) door2.draw(w, g);
-        if(backDoor != null) backDoor.draw(w, g);
         /* for (Enemy e : enemies){
             e.draw(g);
-        }
-        for (Door d : doors){
-            d.draw(g);
         } */
+        for (Door d : doors){
+            if (d != null) d.draw(w, g);
+        } 
         gas.draw(w, g);
     } // draw()
     // =====================================================================
