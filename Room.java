@@ -43,6 +43,13 @@ public class Room{
 
     // =====================================================================
     public Room(int roomType){
+        try {                
+                wall1 = ImageIO.read(new File("wall.png"));
+                line = ImageIO.read(new File("line.png"));
+            } 
+            catch (IOException ex) {
+                System.out.println("Failed to find image.");
+            }
         this.roomType = roomType;
         platforms = new ArrayList<Platform>();
         gas = new Gas();
@@ -56,14 +63,6 @@ public class Room{
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
-
-            try {                
-                wall1 = ImageIO.read(new File("wall.png"));
-                line = ImageIO.read(new File("line.png"));
-            } 
-            catch (IOException ex) {
-                System.out.println("Failed to find image.");
-            }
             
             System.out.println("Room Type 0 created");
         }
@@ -78,7 +77,7 @@ public class Room{
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
             backDoor = new Door(25, 615, 0);
-
+            
             System.out.println("Room Type 1 created");
         }
         else if (roomType == 2){
@@ -137,6 +136,7 @@ public class Room{
 
             System.out.println("Room Type 5 created");
         }
+
     } // Room()
     // =====================================================================
 
