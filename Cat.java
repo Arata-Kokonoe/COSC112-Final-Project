@@ -76,7 +76,7 @@ public class Cat implements canShoot{
     // =====================================================================
     public void draw(World w, Graphics g){
         if (orientation.equals("right")) {
-            if((catVelocity.x > 0) && ((int)w.time % 2 != 0) && (catVelocity.y == 0)) {
+            if((catVelocity.x > 0) && ((((w.time % 1) > 0.25) && ((w.time % 1) < 0.5)) || ((w.time % 1) > 0.75)) && (catVelocity.y == 0)) {
                 g.drawImage(rightRunSprite, (int)catPosition.x, (int)catPosition.y, null);
             }
             else if(catVelocity.y < 0) {
@@ -90,7 +90,7 @@ public class Cat implements canShoot{
             }
         }
         if (orientation.equals("left")) {
-            if((catVelocity.x < 0) && ((int)w.time % 2 != 0) && (catVelocity.y == 0)) {
+            if((catVelocity.x < 0) && ((((w.time % 1) > 0.25) && ((w.time % 1) < 0.5)) || ((w.time % 1) > 0.75)) && (catVelocity.y == 0)) {
                 g.drawImage(leftRunSprite, (int)catPosition.x, (int)catPosition.y, null);
             }
             else if(catVelocity.y < 0) {
