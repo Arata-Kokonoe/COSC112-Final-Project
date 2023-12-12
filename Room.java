@@ -63,6 +63,7 @@ public class Room{
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
+            backDoor = new Door(25, 615, 0);
 
             System.out.println("Room Type 1 created");
         }
@@ -76,6 +77,7 @@ public class Room{
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
+            backDoor = new Door(25, 575, 0);
 
             System.out.println("Room Type 2 created");
         }
@@ -89,6 +91,7 @@ public class Room{
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
+            backDoor = new Door(25, 575, 0);
 
             System.out.println("Room Type 3 created");
         }
@@ -102,6 +105,7 @@ public class Room{
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
+            backDoor = new Door(25, 575, 0);
 
             System.out.println("Room Type 4 created");
         }
@@ -115,6 +119,7 @@ public class Room{
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             door1 = new Door(25, 53, 1);
+            backDoor = new Door(25, 575, 0);
 
             System.out.println("Room Type 5 created");
         }
@@ -131,6 +136,7 @@ public class Room{
         button.draw(w, g);
         if(door1 != null) door1.draw(w, g);
         if(door2 != null) door2.draw(w, g);
+        if(backDoor != null) backDoor.draw(w, g);
         /* for (Enemy e : enemies){
             e.draw(g);
         }
