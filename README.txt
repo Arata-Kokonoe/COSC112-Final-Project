@@ -11,20 +11,15 @@ Description: "This program will be our own take on a video game combining both a
     The theme of the game will revolve around Schrodinger’s Cat thought experiment, where the player will play as a cat named “Milton” trapped inside of a cardboard box. 
     They will have to traverse through procedurally generated rooms while in constant danger from poisonous gas filling each room, along with enemies trying to kill them at every turn. 
     One unique aspect of this game is the ability to switch between a state of dead/alive, both having their own advantages and disadvantages. 
-    As the player continues their epic adventure, they may find special puzzle rooms to reward them with extra lives as a way to recover. 
-    At the end of their journey, the player will face their greatest enemy yet, Schrodinger (temporary) himself."
-
-Currently Known Bugs:
-    * hitboxes are weird (sometimes get stuck/phase through platform)
-    * button only gets pressed when you jump
+    As the player continues their epic adventure, they may find extra life consumables in rooms as a way to recover their lost health."
 
 Controls:
     * A to move left
     * D to move right
     * Space to jump
+    * J to attack (once every 3 seconds)
+    * K to transform into a dead cat, allowing you to not take any damage for 10 seconds, but also stopping you from being able to attack (15 second cooldown)
 
 Future Updates (AKA the To-Do List):
-    * add the roguelike aspects to the game (enemies, exp, upgrades/items, etc.)
-    * procedurally generated room layout
-    * linked list of rooms to allow player to move back and forth through rooms
-    * more rooms
+    * add more roguelike aspects to the game (enemies, exp, upgrades/items, etc.)
+    * make the player have a reason to go backwards sometimes (i.e. rooms with no doors/dead end rooms)
