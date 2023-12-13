@@ -313,6 +313,9 @@ public class Cat{
     } // state()
     // =====================================================================
 
+
+
+    
     public void attackState(double time){
         attackStateCD = time;
         attackState = false;   

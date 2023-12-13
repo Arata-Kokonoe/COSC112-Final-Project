@@ -46,6 +46,13 @@ public class World{
         firstRoom = new Room(RNG); //temporary to test just one room
         currentRoom = firstRoom;
 
+        try {
+            gameOver = ImageIO.read(new File("game-over.png"));
+        }
+        catch (IOException ex) {
+            System.out.println("Failed to find image.");
+        }
+
     } // World()
     // =====================================================================
 
@@ -56,7 +63,6 @@ public class World{
         //map.draw(g);
         if(status) {
             g.drawImage(gameOver, 0, 0, null);
-            System.out.println("bruh");
         }
 
         else {
