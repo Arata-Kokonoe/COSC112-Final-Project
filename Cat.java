@@ -21,6 +21,7 @@ public class Cat{
 
     public double lives;
     public boolean transformState;
+    public boolean isTransformed;
     public boolean attackState;
     public int experience;
     public Pair catPosition;
@@ -62,6 +63,8 @@ public class Cat{
         orientation = "right";
         transformStateCD = 0.0;
         transformState = true;
+        attackState = true;
+        isTransformed = false;
 
         try{ 
             rightAttackSprite = ImageIO.read(new File("attack-right.png"));
@@ -108,8 +111,8 @@ public class Cat{
                 leftLandSprite = ImageIO.read(new File("cat-land-left.png"));
                 rightHalfHeartSprite = ImageIO.read(new File("HalfHeartRight.png"));
                 leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
-                rightAttackSprite = ImageIO.read(new File("catScratchRight.png"));
-                leftAttackSprite = ImageIO.read(new File("catScratchLeft.png"));
+                rightAttackSprite = ImageIO.read(new File("attack-right.png"));
+                leftAttackSprite = ImageIO.read(new File("attack-left.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");
@@ -253,6 +256,12 @@ public class Cat{
             w.currentRoom.gas.vanish();
         }
 
+        for(Projectile p : w.currentRoom.projectiles){
+            if (catHitbox.anyCollision(p.projHitbox) && !isTransformed){
+                lives -= 0.5;
+                p.hitSomething = true;
+            }
+        }
 
         if(w.currentRoom.button != null && w.currentRoom.button.pressed){
             for (Door d : w.currentRoom.doors){
@@ -313,10 +322,10 @@ public class Cat{
     
     // =====================================================================
     public void shoot(World w){
-        if (orientation == "left" && transformState){
+        if (orientation == "left" && !isTransformed){
             w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x - leftAttackSprite.getWidth(), catPosition.y), new Pair(-300, 0), leftAttackSprite, attackRange));
         }
-        else if (orientation == "right" && transformState){
+        else if (orientation == "right" && !isTransformed){
             w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x + catDimensions.x, catPosition.y), new Pair(300, 0), rightAttackSprite, attackRange));
         }
     } // shoot()

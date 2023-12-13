@@ -30,9 +30,9 @@ public class Room{
     public ArrayList<Platform> platforms; // all of the platforms in the room
     public ArrayList<Door> doors;
     public ArrayList<Projectile> projectiles;
+    public ArrayList<Enemy> enemies;
     public Button button;
     public Gas gas;
-    public Enemy enemy;
     public Room prev;
     public Room next1;
     public Room next2;
@@ -50,6 +50,7 @@ public class Room{
         projectiles = new ArrayList<Projectile>();
         platforms = new ArrayList<Platform>();
         doors = new ArrayList<Door>();
+        enemies = new ArrayList<Enemy>();
         gas = new Gas();
 
         try {                
@@ -71,44 +72,35 @@ public class Room{
         Platform currentPlatform = platforms.get(1);
         while(!(currentPlatform.platformPosition.y <= 150)){
             int length = RNG.nextInt(3) + 1;
-            if (currentPlatform.platformPosition.x >= 1024 - (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x)){ //more space on left
-                int min = (int)currentPlatform.platformPosition.x - 200 - (length * 100);
+            String leftOrRight;
+            if (currentPlatform.platformPosition.x >= 1024 - (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x)){ //more space on left or equal space
+                int min = (int)currentPlatform.platformPosition.x - 195 - (length * 100);
                 int max = (int)currentPlatform.platformPosition.x - (length * 100);
                 platforms.add(new Platform(RNG.nextInt(max - min) + min, (int)currentPlatform.platformPosition.y - (RNG.nextInt(100 - 75) + 75), length));
+                leftOrRight = "left";
+
             }
-            else if (currentPlatform.platformPosition.x < 1024 - (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x)){ //more space on right
+            else{ //more space on right
                 int min = (int)currentPlatform.platformPosition.x + (int)currentPlatform.platformDimensions.x;
-                int max = (int)currentPlatform.platformPosition.x + (int)currentPlatform.platformDimensions.x + 200;
+                int max = (int)currentPlatform.platformPosition.x + (int)currentPlatform.platformDimensions.x + 195;
                 platforms.add(new Platform(RNG.nextInt(max - min) + min, (int)currentPlatform.platformPosition.y - (RNG.nextInt(100 - 75) + 75), length));
+                leftOrRight = "right";
             }
             currentPlatform = platforms.get(platforms.size()-1);
+
+            int addEnemy = RNG.nextInt(3);
+            if (addEnemy == 2){
+                if (leftOrRight == "right") enemies.add(new Enemy((int)(currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x - 39), (int)currentPlatform.platformPosition.y - 35, "left"));
+                else if (leftOrRight == "left") enemies.add(new Enemy((int)(currentPlatform.platformPosition.x), (int)currentPlatform.platformPosition.y - 35, "right"));
+            }
+            else if (addEnemy == 1){
+                //add melee enemy
+            }
         }
         
         button = new Button(platforms.get(platforms.size()-2).platformPosition.x + platforms.get(platforms.size()-2).platformDimensions.x/2 - 15, platforms.get(platforms.size()-2).platformPosition.y - 15);
         doors.add(new Door (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x/2 - 33.5, currentPlatform.platformPosition.y - 72, 1));
         
-            /*
-            platforms.add(new Platform(0, 675, 11));
-            platforms.add(new Platform(0, 575, 3));
-            platforms.add(new Platform(0, 475, 3));
-            platforms.add(new Platform(0, 375, 3));
-            platforms.add(new Platform(0, 275, 3));
-            platforms.add(new Platform(0, 175, 3));
-            platforms.add(new Platform(0, 75, 3));
-            doors.add(new Door(25, 3, 1));
-
-            platforms.add(new Platform(512, 605, 3));
-            platforms.add(new Platform(512, 535, 3));
-            platforms.add(new Platform(512, 465, 3));
-            platforms.add(new Platform(512, 395, 3));
-            platforms.add(new Platform(512, 325, 3));
-            platforms.add(new Platform(512, 255, 3));
-            platforms.add(new Platform(512, 185, 3));
-            platforms.add(new Platform(512, 115, 3));
-
-            doors.add(new Door(25, 3, 1));
-            */
-
     } // Room()
     // =====================================================================
 
@@ -117,7 +109,7 @@ public class Room{
         platforms = new ArrayList<Platform>();
         doors = new ArrayList<Door>();
         gas = new Gas();
-        enemy = new Enemy(924, 645);
+        enemies.add(new Enemy(924, 645, "left"));
         if (roomType == 0){
             try {                
                 wall = ImageIO.read(new File("wall-1.png"));
@@ -172,9 +164,9 @@ public class Room{
             p.draw(g);
         }
         if (button != null) button.draw(w, g);
-        /* for (Enemy e : enemies){
+        for (Enemy e : enemies){
             e.draw(g);
-        } */
+        } 
         for (Door d : doors){
             d.draw(g);
         } 
@@ -183,9 +175,10 @@ public class Room{
         }
 
         if((w.time % 1) <= (1.0/60)) {
-            enemy.shoot(w);
+            for(Enemy e : enemies){
+                e.shoot(w);
+            }
         }
-        enemy.draw(w, g);
         gas.draw(w, g);
     } // draw()
     // =====================================================================
@@ -197,6 +190,9 @@ public class Room{
         gas.update(time);
         for(Projectile p: projectiles){
             p.update(w, time);
+        }
+        for(Enemy e: enemies){
+            e.update(w, time);
         }
     } // update()
     // =====================================================================

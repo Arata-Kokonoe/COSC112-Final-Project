@@ -66,10 +66,10 @@ public class Main extends JPanel implements KeyListener{
         System.out.println("You pressed down: " + c);
         if (c == 'a'){
             world.player.catVelocity.x = -150;
-        }; // moves left
+        }; //moves left
         if (c == 'd'){
             world.player.catVelocity.x = 150;
-        }; // moves right
+        }; //moves right
         if (c == ' '){
             System.out.println(world.player.catVelocity.y);
             if ((world.player.catVelocity.y == 0.0) && (jump == true)){
@@ -83,12 +83,13 @@ public class Main extends JPanel implements KeyListener{
                 world.player.attackState(world.time);
                 world.player.shoot(world);
             }
-        }; // attacks
+        }; //attacks
         if (c == 'k'){
             if(world.player.transformState == true) {
                 world.player.transformState(world.time);
+                world.player.isTransformed = true;
             }
-        }; // switches between dead and alive
+        }; //switches between dead and alive
         if (c == 'm'){}; // opens map
         if (c == 'p'){}; // opens the menus; change later to Esc if possible
     } // keyPressed()
