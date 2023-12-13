@@ -24,7 +24,7 @@ public class Cat{
     public boolean isTransformed;
     public int timer;
     public boolean attackState;
-    public int experience;
+    public int score;
     public Pair catPosition;
     public Pair catVelocity;
     public Pair catAcceleration;
@@ -263,7 +263,7 @@ public class Cat{
             collision = true;
         }
 
-        if (catPosition.y + catDimensions.y >= w.height - w.currentRoom.gas.height) {
+        if (w.currentRoom.gas != null && catPosition.y + catDimensions.y >= w.height - w.currentRoom.gas.height) {
             lives -= 0.5;
             System.out.println("Lives: " + lives);
             catPosition = new Pair(50.0, 615.0);
@@ -275,7 +275,7 @@ public class Cat{
             for (Door d : w.currentRoom.doors){
                 d.unlocked = true;
             }
-            w.currentRoom.gas.vanish();
+            if (w.currentRoom.gas != null) w.currentRoom.gas.vanish();
         }
 
         for(Projectile p : w.currentRoom.projectiles){
