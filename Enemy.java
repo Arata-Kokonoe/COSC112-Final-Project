@@ -28,6 +28,7 @@ public class Enemy{
     public int velocity;
     public String orientation;
     public int health;
+    public boolean dead;
     // =====================================================================
 
 
@@ -40,6 +41,7 @@ public class Enemy{
         this.orientation = orientation;
         health = 1;
         velocity = 0;
+        dead = false;
         try{ 
           rightSprite = ImageIO.read(new File("enemy-right.png"));
           leftSprite = ImageIO.read(new File("enemy-left.png"));
@@ -55,7 +57,7 @@ public class Enemy{
 
     // =====================================================================
     public void draw(Graphics g){
-      if(health != 0){
+      if(!dead){
         if (orientation == "left") g.drawImage(leftSprite, xPos, yPos, null);
         else if (orientation == "right") g.drawImage(rightSprite, xPos, yPos, null);
       }
@@ -66,7 +68,7 @@ public class Enemy{
 
     // =====================================================================
     public void shoot(World w){
-      if(health != 0){
+      if(!dead){
         if (orientation == "left") w.currentRoom.projectiles.add(new Projectile(new Pair(xPos - 10, (yPos + 15)), new Pair(-300, 0), enemyAttackSprite, 1024));
         else if (orientation == "right") w.currentRoom.projectiles.add(new Projectile(new Pair(xPos + 45, (yPos + 15)), new Pair(300, 0), enemyAttackSprite, 1024));
       }
@@ -82,7 +84,7 @@ public class Enemy{
         if (p != null && enemyHitbox.anyCollision(p.projHitbox)){
           p.hitSomething = true;
           health --;
-          if (health == 0) w.player.score ++;
+          if (health == 0) dead = true;
         }
       }
 

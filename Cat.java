@@ -278,6 +278,15 @@ public class Cat{
                 p.hitSomething = true;
             }
         }
+        
+        for(Collectable c : w.currentRoom.collectables){
+            if (c != null && catHitbox.anyCollision(c.collHitbox) && !c.used){
+                if(lives != 3){
+                    lives += 0.5;
+                    c.used = true;
+                }
+            }
+        }
 
         if(w.currentRoom.button != null && w.currentRoom.button.pressed){
             for (Door d : w.currentRoom.doors){

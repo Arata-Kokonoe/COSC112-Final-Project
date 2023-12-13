@@ -31,6 +31,7 @@ public class Room{
     public ArrayList<Door> doors;
     public ArrayList<Projectile> projectiles;
     public ArrayList<Enemy> enemies;
+    public ArrayList<Collectable> collectables;
     public Button button;
     public Gas gas;
     public Room prev;
@@ -53,8 +54,9 @@ public class Room{
         platforms = new ArrayList<Platform>();
         doors = new ArrayList<Door>();
         enemies = new ArrayList<Enemy>();
+        collectables = new ArrayList<Collectable>();
         gas = new Gas();
-        difficulty = 1 + (prevRooms / 3);
+        difficulty = 1 + ((prevRooms - 2) / 3);
         isRoomZero = false;
         
 
@@ -97,14 +99,31 @@ public class Room{
         for(int i = 1; i < platforms.size()-1; i ++){
             platformIndexes.add(i);
         }
+
         for(int i = 0; i < difficulty; i++){
             if(!platformIndexes.isEmpty()){
                 int randomPlatform = platformIndexes.get(RNG.nextInt(platformIndexes.size()));
-                        if (platforms.get(randomPlatform).platformPosition.x >= 1024 - (platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x)){
-                            enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x - 39), (int)platforms.get(randomPlatform).platformPosition.y - 35, "left"));
-                            platformIndexes.remove(platformIndexes.indexOf(randomPlatform));
-                        }
-                        else enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x), (int)platforms.get(randomPlatform).platformPosition.y - 35, "right"));
+                if (randomPlatform == 1) {
+                    enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x - 39), (int)platforms.get(randomPlatform).platformPosition.y - 35, "left"));
+                }
+                else if (platforms.get(randomPlatform).platformPosition.x >= 1024 - (platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x)){
+                    enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x - 39), (int)platforms.get(randomPlatform).platformPosition.y - 35, "left"));
+                }
+                else enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x), (int)platforms.get(randomPlatform).platformPosition.y - 35, "right"));
+                platformIndexes.remove(platformIndexes.indexOf(randomPlatform));
+            }
+        }
+
+        platformIndexes = new ArrayList<>();
+        for(int i = 1; i < platforms.size()-2; i ++){
+            platformIndexes.add(i);
+        }
+        
+        int numHearts = RNG.nextInt(3);
+        for(int i = 0; i < numHearts; i++){
+            if(!platformIndexes.isEmpty()){
+                int randomPlatform = platformIndexes.get(RNG.nextInt(platformIndexes.size()));
+                collectables.add(new Collectable((int)(platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x/2 - 15), (int)(platforms.get(randomPlatform).platformPosition.y - 30)));
             }
         }
         
@@ -119,6 +138,7 @@ public class Room{
         platforms = new ArrayList<Platform>();
         doors = new ArrayList<Door>();
         enemies = new ArrayList<Enemy>();
+        collectables = new ArrayList<Collectable>();
         if (roomType == 0){
             try {                
                 wall = ImageIO.read(new File("wall-1.png"));
@@ -152,7 +172,7 @@ public class Room{
             platforms.add(new Platform(0, 675, 11));
             enemies.add(new Enemy(985, 645, "left"));
             platforms.add(new Platform(400, 575, 2));
-            enemies.add(new Enemy(400, 545, "right"));
+            enemies.add(new Enemy(561, 545, "left"));
             platforms.add(new Platform(775, 475, 3));
             enemies.add(new Enemy(985, 445, "left"));
             platforms.add(new Platform(550, 375, 2));
@@ -189,6 +209,9 @@ public class Room{
         } 
         for (Projectile p : projectiles){
             if (p != null) p.draw(g);
+        }
+        for (Collectable c : collectables){
+            c.draw(g);
         }
 
         if((w.time % 1) <= (1.0/60)) {
