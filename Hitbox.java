@@ -42,6 +42,7 @@ public class Hitbox {
 
         else return false;
     } // topCollision()
+    // taken from https://stackoverflow.com/questions/5062833/detecting-the-direction-of-a-collision
     // =====================================================================
 
 
@@ -58,6 +59,7 @@ public class Hitbox {
 
         else return false;
     } // leftCollision()
+    // taken from https://stackoverflow.com/questions/5062833/detecting-the-direction-of-a-collision
     // =====================================================================
 
 
@@ -74,6 +76,7 @@ public class Hitbox {
 
         else return false;
     } // rightCollision()
+    // taken from https://stackoverflow.com/questions/5062833/detecting-the-direction-of-a-collision
     // =====================================================================
 
 
@@ -90,6 +93,7 @@ public class Hitbox {
         
         else return false;
     } // botCollision()
+    // taken form https://stackoverflow.com/questions/5062833/detecting-the-direction-of-a-collision
     // =====================================================================
 
 
