@@ -66,7 +66,7 @@ public class Enemy{
 
     // =====================================================================
     public void shoot(World w){
-      if(health!= 0){
+      if(health != 0){
         if (orientation == "left") w.currentRoom.projectiles.add(new Projectile(new Pair(xPos - 10, (yPos + 15)), new Pair(-300, 0), enemyAttackSprite, 1024));
         else if (orientation == "right") w.currentRoom.projectiles.add(new Projectile(new Pair(xPos + 45, (yPos + 15)), new Pair(300, 0), enemyAttackSprite, 1024));
       }
@@ -82,6 +82,7 @@ public class Enemy{
         if (p != null && enemyHitbox.anyCollision(p.projHitbox)){
           p.hitSomething = true;
           health --;
+          if (health == 0) w.player.score ++;
         }
       }
 

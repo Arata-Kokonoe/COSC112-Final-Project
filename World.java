@@ -80,13 +80,18 @@ public class World{
 
     // =====================================================================
     public void addRoom(int doorNum){
-        if (doorNum == 1){
-            currentRoom.next1 = new Room(RNG);
+        if (currentRoom.isRoomZero){
+            currentRoom.next1 = new Room(1);
+            currentRoom.next1.prev = currentRoom;
+            currentRoom = currentRoom.next1;
+        }
+        else if (doorNum == 1){
+            currentRoom.next1 = new Room(RNG, countRooms());
             currentRoom.next1.prev = currentRoom;
             currentRoom = currentRoom.next1;
         }
         else if (doorNum == 2){
-            currentRoom.next2 = new Room(RNG);
+            currentRoom.next2 = new Room(RNG, countRooms());
             currentRoom.next2.prev = currentRoom;
             currentRoom = currentRoom.next2;
         }
@@ -95,16 +100,10 @@ public class World{
     // =====================================================================
     public int countRooms(){
         int count = 1;
-        ArrayList<Room> toConsiderList = new ArrayList<Room>();
-        boolean isCurrentRoom = false;
-        if (firstRoom == currentRoom) isCurrentRoom = true;
-        toConsiderList.add(currentRoom);
-        while(!isCurrentRoom){
-            Room popped = toConsiderList.remove(toConsiderList.size()-1);
+        Room roomPointer = currentRoom;
+        while(roomPointer != firstRoom){
             count++;
-            if (popped.next1 != null) toConsiderList.add(popped.next1);
-            if (popped.next2 != null) toConsiderList.add(popped.next2);
-            if (popped == currentRoom) isCurrentRoom = true;
+            roomPointer = roomPointer.prev; 
         }
         return count;
     } // countRooms()
