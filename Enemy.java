@@ -38,7 +38,7 @@ public class Enemy{
         this.yPos = y;
         enemyHitbox = new Hitbox(new Pair(39, 35), new Pair(x, y));
         this.orientation = orientation;
-        health = 2;
+        health = 1;
         velocity = 0;
         try{ 
           rightSprite = ImageIO.read(new File("enemy-right.png"));

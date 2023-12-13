@@ -59,7 +59,7 @@ public class Room{
         
 
         try {                
-                wall = ImageIO.read(new File("wall-1.png"));
+                wall = ImageIO.read(new File("wall.png"));
                 line = ImageIO.read(new File("line.png"));
             } 
             catch (IOException ex) {
@@ -94,7 +94,7 @@ public class Room{
 
 
         ArrayList<Integer> platformIndexes = new ArrayList<>();
-        for(int i = 1; i < platforms.size(); i ++){
+        for(int i = 1; i < platforms.size()-1; i ++){
             platformIndexes.add(i);
         }
         for(int i = 0; i < difficulty; i++){
@@ -152,14 +152,15 @@ public class Room{
             platforms.add(new Platform(0, 675, 11));
             enemies.add(new Enemy(985, 645, "left"));
             platforms.add(new Platform(400, 575, 2));
-            enemies.add(new Enemy(561, 545, "right"));
+            enemies.add(new Enemy(400, 545, "right"));
             platforms.add(new Platform(775, 475, 3));
             enemies.add(new Enemy(985, 445, "left"));
             platforms.add(new Platform(550, 375, 2));
-            enemies.add(new Enemy(711, 345, "left"));
+            enemies.add(new Enemy(550, 345, "right"));
             platforms.add(new Platform(400, 300, 2));
-            enemies.add(new Enemy(561, 270, "left"));
+            enemies.add(new Enemy(400, 270, "right"));
             platforms.add(new Platform(250, 225, 2));
+            enemies.add(new Enemy(250, 195, "right"));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
             doors.add(new Door(25, 53, 1));
