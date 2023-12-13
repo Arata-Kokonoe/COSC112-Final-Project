@@ -42,8 +42,7 @@ public class World{
         this.height = height;
         player = new Cat();
 
-        //firstRoom = new Node(new Room(RNG.nextInt(5))); replace whats inside .nextInt() with however many rooms we design
-        firstRoom = new Room(0); //temporary to test just one room
+        firstRoom = new Room(0);
         currentRoom = firstRoom;
 
         try {

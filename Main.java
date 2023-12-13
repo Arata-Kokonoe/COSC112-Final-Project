@@ -76,7 +76,6 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     boolean attack = true;
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
-        System.out.println("You pressed down: " + c);
         if(play){
             if (c == 'a'){
                 world.player.catVelocity.x = -150;
@@ -85,7 +84,6 @@ public class Main extends JPanel implements KeyListener, MouseListener{
                 world.player.catVelocity.x = 150;
             }; //moves right
             if (c == ' '){
-                System.out.println(world.player.catVelocity.y);
                 if ((world.player.catVelocity.y == 0.0) && (jump == true)){
                     jump = false;
                     world.player.catVelocity.y = -250.0;

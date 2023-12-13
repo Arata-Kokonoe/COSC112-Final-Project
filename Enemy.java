@@ -25,7 +25,6 @@ public class Enemy{
     private BufferedImage leftSprite;
     private BufferedImage enemyAttackSprite;
     public Hitbox enemyHitbox;
-    public int velocity;
     public String orientation;
     public int health;
     public boolean dead;
@@ -40,7 +39,6 @@ public class Enemy{
         enemyHitbox = new Hitbox(new Pair(39, 35), new Pair(x, y));
         this.orientation = orientation;
         health = 1;
-        velocity = 0;
         dead = false;
         try{ 
           rightSprite = ImageIO.read(new File("enemy-right.png"));
@@ -77,9 +75,6 @@ public class Enemy{
 
 
     public void update(World w, double time){
-      xPos += velocity * time;
-      enemyHitbox.update(new Pair(xPos, yPos));
-
       for(Projectile p: w.currentRoom.projectiles){
         if (p != null && enemyHitbox.anyCollision(p.projHitbox)){
           p.hitSomething = true;

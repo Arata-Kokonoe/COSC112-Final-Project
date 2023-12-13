@@ -37,9 +37,6 @@ public class Room{
     public Room prev;
     public Room next1;
     public Room next2;
-    public Door door1;
-    public Door door2;
-    public Door backDoor;
     private BufferedImage wall;
     private BufferedImage line;
     public int difficulty;
@@ -58,7 +55,9 @@ public class Room{
         gas = new Gas();
         difficulty = 1 + ((prevRooms - 2) / 3);
         isRoomZero = false;
-        
+
+        int numHearts = RNG.nextInt(3);
+        int numDoors = RNG.nextInt(2) + 1;
 
         try {                
                 wall = ImageIO.read(new File("wall.png"));
@@ -69,7 +68,7 @@ public class Room{
             }
 
         platforms.add(new Platform(0, 675, 11));
-        doors.add(new Door(25, 603, 0));
+        doors.add(new Door(25, 603, 0)); //door 0
 
         int firstLength = RNG.nextInt(3) + 1;
         int firstPositionX = RNG.nextInt(1024 - (firstLength * 100));
@@ -115,11 +114,17 @@ public class Room{
         }
 
         platformIndexes = new ArrayList<>();
-        for(int i = 1; i < platforms.size()-2; i ++){
-            platformIndexes.add(i);
+        if (numDoors == 2){
+            for(int i = 1; i < platforms.size()-3; i ++){
+                platformIndexes.add(i);
+            }
         }
-        
-        int numHearts = RNG.nextInt(3);
+        else if (numDoors == 1){
+            for(int i = 1; i < platforms.size()-2; i ++){
+                platformIndexes.add(i);
+            }
+        }
+
         for(int i = 0; i < numHearts; i++){
             if(!platformIndexes.isEmpty()){
                 int randomPlatform = platformIndexes.get(RNG.nextInt(platformIndexes.size()));
@@ -128,8 +133,15 @@ public class Room{
         }
         
         button = new Button(platforms.get(platforms.size()-2).platformPosition.x + platforms.get(platforms.size()-2).platformDimensions.x/2 - 15, platforms.get(platforms.size()-2).platformPosition.y - 15);
-        doors.add(new Door (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x/2 - 33.5, currentPlatform.platformPosition.y - 72, 1));
         
+        if(numDoors == 2){
+            doors.add(new Door (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x/2 - 33.5, currentPlatform.platformPosition.y - 72, 1)); //door 1
+            doors.add(new Door (platforms.get(platforms.size()-3).platformPosition.x + platforms.get(platforms.size()-3).platformDimensions.x/2 - 33.5, platforms.get(platforms.size()-3).platformPosition.y - 72, 2)); //door 2
+        }
+        else if (numDoors == 1){
+            doors.add(new Door (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x/2 - 33.5, currentPlatform.platformPosition.y - 72, 1)); //door 1
+        }
+
     } // Room()
     // =====================================================================
 
@@ -159,7 +171,6 @@ public class Room{
             enemies.add(new Enemy(974, 445, "left"));
             
             isRoomZero = true;
-            System.out.println("Room Type 0 created");
         }
         else if (roomType == 1){
             try {                
@@ -183,10 +194,8 @@ public class Room{
             enemies.add(new Enemy(250, 195, "right"));
             platforms.add(new Platform(0, 125, 2));
             button = new Button(130, 110);
-            doors.add(new Door(25, 53, 1));
             doors.add(new Door (25, 603, 0));
-            
-            System.out.println("Room Type 1 created");
+            doors.add(new Door(25, 53, 1));
         }
     }
 
