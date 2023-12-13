@@ -22,6 +22,7 @@ public class Cat{
     public double lives;
     public boolean transformState;
     public boolean isTransformed;
+    public int timer;
     public boolean attackState;
     public int score;
     public Pair catPosition;
@@ -62,9 +63,10 @@ public class Cat{
         attackRange = 100;
         orientation = "right";
         transformStateCD = 0.0;
+        timer = 0;
         transformState = true;
-        attackState = true;
         isTransformed = false;
+        attackState = true;
 
         try{ 
             rightAttackSprite = ImageIO.read(new File("attack-right.png"));
@@ -157,6 +159,11 @@ public class Cat{
             if(i % 1 != 0) g.drawImage(rightHalfHeartSprite, (int)(w.width - (90 - (30 * (i - 0.5)))), 0, null);
             else if (i % 1 == 0) g.drawImage(leftHalfHeartSprite, (int)(w.width - (90 - (30 * i))), 0, null);
         }
+
+        if(isTransformed) {
+            g.fillRect((int)catPosition.x, ((int)catPosition.y - 10), 60 - timer, 5);
+        }
+
     } // draw()
     // =====================================================================
 
@@ -203,9 +210,18 @@ public class Cat{
         if (catVelocity.x < 0.0) orientation = "left";
         else if (catVelocity.x > 0.0) orientation = "right";
 
+        if(isTransformed) {
+            if((w.time % 1) <= (1.0/60)) {
+                timer += 5;
+            }
+        }
 
         if(w.time > (transformStateCD + 25)) {
             transformState = true;
+        }
+
+        if(w.time > (transformStateCD + 10)) {
+            isTransformed = false;
         }
 
         if(w.time > (attackStateCD + 3)){
@@ -310,8 +326,11 @@ public class Cat{
     public void transformState(double time) {
         transformStateCD = time;
         transformState = false;
-    } // state()
+    } // transformState()
     // =====================================================================
+
+
+
 
     public void attackState(double time){
         attackStateCD = time;

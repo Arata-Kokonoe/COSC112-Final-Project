@@ -31,7 +31,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     public static final int WIDTH = 1024;
     public static final int HEIGHT = 768;
     public static final int FPS = 60;
-    public boolean play;
+    private static JFrame frame;
     private BufferedImage startScreen;
     World world;
     // =====================================================================
@@ -50,7 +50,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
                 if((world.player.lives > 0) && (play == true)) {
                     world.updateWorld(1.0/FPS);
                 }
-                else if(world.player.lives == 0.0) {
+                if(world.player.lives == 0.0) {
                     world.status = true;
                 }
                 repaint();
@@ -141,8 +141,21 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 
 
     // =====================================================================
+    boolean play;
+    boolean home = true;
     public void mousePressed(MouseEvent e) { 
-        if(((e.getX() > 370) && (e.getX() < 647)) && ((e.getY() > 432) && (e.getY() < 535))) {
+        if((world.status == true) && (((e.getX() > 390) && (e.getX() < 470)) && ((e.getY() > 435) && (e.getY() < 525)))) {
+            world.status = false;
+            play = true;
+            world = new World(WIDTH, HEIGHT);
+        }
+        else if((world.status == true) && (((e.getX() > 555) && (e.getX() < 645)) && ((e.getY() > 435) && (e.getY() < 525)))) {
+            world.status = false;
+            play = false;
+            world = new World(WIDTH, HEIGHT);
+            home = true;
+        }
+        else if(((e.getX() > 370) && (e.getX() < 647)) && ((e.getY() > 432) && (e.getY() < 535))) {
             play = true;
         }
     }
@@ -206,7 +219,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 
     // =====================================================================
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Milton Escapes");
+        frame = new JFrame("Milton Escapes");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Main mainInstance = new Main();
@@ -214,6 +227,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 
         frame.pack();
         frame.setVisible(true);
+
     } // main()
     // =====================================================================
 
@@ -233,7 +247,9 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             System.out.println("Failed to find image.");
         } 
         
-        g.drawImage(startScreen, 0, 0, null);
+        if(home) {
+            g.drawImage(startScreen, 0, 0, null);
+        }
 
         if(play) {
             world.drawWorld(g); 
