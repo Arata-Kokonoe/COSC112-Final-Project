@@ -20,12 +20,15 @@ public class Cat{
     // DATA MEMBERS
 
     public double lives;
-    public boolean state;
+    public boolean transformState;
+    public boolean isTransformed;
+    public boolean attackState;
     public int experience;
     public Pair catPosition;
     public Pair catVelocity;
     public Pair catAcceleration;
-    public double stateCD;
+    public double transformStateCD;
+    public double attackStateCD;
     public Pair catDimensions;
     public int attackRange;
     private BufferedImage rightSprite;
@@ -53,13 +56,15 @@ public class Cat{
         catPosition = new Pair(50.0, 615.0);
         catVelocity = new Pair(0.0, 0.01);
         catAcceleration = new Pair(0.0, 300.0);
-        catDimensions = new Pair(65.0, 40.0);
+        catDimensions = new Pair(48.0, 40.0);
         catHitbox = new Hitbox(catDimensions, catPosition);
         lives = 3;
         attackRange = 100;
         orientation = "right";
-        stateCD = 0.0;
-        state = true;
+        transformStateCD = 0.0;
+        transformState = true;
+        attackState = true;
+        isTransformed = false;
 
         try{ 
             rightAttackSprite = ImageIO.read(new File("attack-right.png"));
@@ -75,7 +80,7 @@ public class Cat{
 
     // =====================================================================
     public void draw(World w, Graphics g){
-        if((stateCD != 0) && ((w.time - stateCD) < 10)) {
+        if((transformStateCD != 0) && ((w.time - transformStateCD) < 10)) {
             try{ 
                 rightSprite = ImageIO.read(new File("dead-still-right.png"));
                 leftSprite = ImageIO.read(new File("dead-still-left.png"));
@@ -106,6 +111,8 @@ public class Cat{
                 leftLandSprite = ImageIO.read(new File("cat-land-left.png"));
                 rightHalfHeartSprite = ImageIO.read(new File("HalfHeartRight.png"));
                 leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
+                rightAttackSprite = ImageIO.read(new File("attack-right.png"));
+                leftAttackSprite = ImageIO.read(new File("attack-left.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");
@@ -184,20 +191,25 @@ public class Cat{
         }
 
 
-        if (!this.checkCollisions(w) && catVelocity.y == 0.0){
+        if (catVelocity.y == 0.0){
             boolean check = false;
             for (Platform p : w.currentRoom.platforms) {
                 if (catHitbox.isOnTopOf(p.platformHitbox)) check = true;
             }
             if (!check) catVelocity.y = 0.01;
         }
+        checkCollisions(w);
         
         if (catVelocity.x < 0.0) orientation = "left";
         else if (catVelocity.x > 0.0) orientation = "right";
 
 
-        if(w.time > (stateCD + 25)) {
-            state = true;
+        if(w.time > (transformStateCD + 25)) {
+            transformState = true;
+        }
+
+        if(w.time > (attackStateCD + 3)){
+            attackState = true;
         }
         
         catHitbox.update(catPosition);
@@ -236,7 +248,7 @@ public class Cat{
             w.currentRoom.gas.reset();
         }
 
-        if (catHitbox.anyCollision(w.currentRoom.button.buttonHitbox)){
+        if (w.currentRoom.button != null && catHitbox.anyCollision(w.currentRoom.button.buttonHitbox)){
             w.currentRoom.button.pressed = true;
             for (Door d : w.currentRoom.doors){
                 d.unlocked = true;
@@ -244,16 +256,24 @@ public class Cat{
             w.currentRoom.gas.vanish();
         }
 
+        for(Projectile p : w.currentRoom.projectiles){
+            if (catHitbox.anyCollision(p.projHitbox) && !isTransformed){
+                lives -= 0.5;
+                p.hitSomething = true;
+            }
+        }
 
-        if(w.currentRoom.button.pressed){
+        if(w.currentRoom.button != null && w.currentRoom.button.pressed){
             for (Door d : w.currentRoom.doors){
                 if(catHitbox.anyCollision(d.doorHitbox)){
                     if(d.doorType == 0){
                         if(w.currentRoom == w.currentRoom.prev.next1){
                             catPosition = new Pair(100.0, 60.0);
+                            catVelocity.x *= (-1);
                         }
                         else if (w.currentRoom == w.currentRoom.prev.next2){
                             catPosition = new Pair(950.0, 50.0);
+                            catVelocity.x *= (-1);
                         }
                         w.currentRoom = w.currentRoom.prev;
                     }
@@ -287,21 +307,26 @@ public class Cat{
 
 
     // =====================================================================
-    public void state(double time) {
-        stateCD = time;
-        state = false;
+    public void transformState(double time) {
+        transformStateCD = time;
+        transformState = false;
     } // state()
     // =====================================================================
+
+    public void attackState(double time){
+        attackStateCD = time;
+        attackState = false;   
+    }
 
 
     
     // =====================================================================
     public void shoot(World w){
-        if (orientation == "left"){
-            w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x, catPosition.y), new Pair(-300, 0), leftAttackSprite, attackRange));
+        if (orientation == "left" && !isTransformed){
+            w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x - leftAttackSprite.getWidth(), catPosition.y), new Pair(-300, 0), leftAttackSprite, attackRange));
         }
-        else if (orientation == "right"){
-            w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x, catPosition.y), new Pair(300, 0), rightAttackSprite, attackRange));
+        else if (orientation == "right" && !isTransformed){
+            w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x + catDimensions.x, catPosition.y), new Pair(300, 0), rightAttackSprite, attackRange));
         }
     } // shoot()
     // =====================================================================

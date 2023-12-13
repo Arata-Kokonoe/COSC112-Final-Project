@@ -73,15 +73,16 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 
     // =====================================================================
     boolean jump = true; 
+    boolean attack = true;
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
         System.out.println("You pressed down: " + c);
         if (c == 'a'){
             world.player.catVelocity.x = -150;
-        }; // moves left
+        }; //moves left
         if (c == 'd'){
             world.player.catVelocity.x = 150;
-        }; // moves right
+        }; //moves right
         if (c == ' '){
             System.out.println(world.player.catVelocity.y);
             if ((world.player.catVelocity.y == 0.0) && (jump == true)){
@@ -90,13 +91,18 @@ public class Main extends JPanel implements KeyListener, MouseListener{
             }
         }; //jumps
         if (c == 'j'){
-            world.player.shoot(world);
-        }; // attacks
-        if (c == 'k'){
-            if(world.player.state == true) {
-                world.player.state(world.time);
+            if (world.player.attackState == true && attack == true) {
+                attack = false;
+                world.player.attackState(world.time);
+                world.player.shoot(world);
             }
-        }; // switches between dead and alive
+        }; //attacks
+        if (c == 'k'){
+            if(world.player.transformState == true) {
+                world.player.transformState(world.time);
+                world.player.isTransformed = true;
+            }
+        }; //switches between dead and alive
         if (c == 'm'){}; // opens map
         if (c == 'p'){}; // opens the menus; change later to Esc if possible
     } // keyPressed()
@@ -115,6 +121,9 @@ public class Main extends JPanel implements KeyListener, MouseListener{
         }; // stops movement
         if(c == ' ') {
             jump = true;
+        }
+        if(c == 'j'){
+            attack = true;
         }
     } // keyReleased()
     // =====================================================================
