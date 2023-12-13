@@ -83,7 +83,7 @@ public class Gas{
     // =====================================================================
     public void vanish(){
         exists = false;
-        height = 0;
+        height = -50;
         lineHeight = 0;
         counter = 0;
     } // vanish()

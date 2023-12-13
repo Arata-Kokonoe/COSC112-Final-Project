@@ -77,34 +77,36 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
         System.out.println("You pressed down: " + c);
-        if (c == 'a'){
-            world.player.catVelocity.x = -150;
-        }; //moves left
-        if (c == 'd'){
-            world.player.catVelocity.x = 150;
-        }; //moves right
-        if (c == ' '){
-            System.out.println(world.player.catVelocity.y);
-            if ((world.player.catVelocity.y == 0.0) && (jump == true)){
-                jump = false;
-                world.player.catVelocity.y = -250.0;
-            }
-        }; //jumps
-        if (c == 'j'){
-            if (world.player.attackState == true && attack == true) {
-                attack = false;
-                world.player.attackState(world.time);
-                world.player.shoot(world);
-            }
-        }; //attacks
-        if (c == 'k'){
-            if(world.player.transformState == true) {
-                world.player.transformState(world.time);
-                world.player.isTransformed = true;
-            }
-        }; //switches between dead and alive
-        if (c == 'm'){}; // opens map
-        if (c == 'p'){}; // opens the menus; change later to Esc if possible
+        if(play){
+            if (c == 'a'){
+                world.player.catVelocity.x = -150;
+            }; //moves left
+            if (c == 'd'){
+                world.player.catVelocity.x = 150;
+            }; //moves right
+            if (c == ' '){
+                System.out.println(world.player.catVelocity.y);
+                if ((world.player.catVelocity.y == 0.0) && (jump == true)){
+                    jump = false;
+                    world.player.catVelocity.y = -250.0;
+                }
+            }; //jumps
+            if (c == 'j'){
+                if (world.player.attackState == true && attack == true) {
+                    attack = false;
+                    world.player.attackState(world.time);
+                    world.player.shoot(world);
+                }
+            }; //attacks
+            if (c == 'k'){
+                if(world.player.transformState == true) {
+                    world.player.transformState(world.time);
+                    world.player.isTransformed = true;
+                }
+            }; //switches between dead and alive
+            if (c == 'm'){}; // opens map
+            if (c == 'p'){}; // opens the menus; change later to Esc if possible
+        }
     } // keyPressed()
     // =====================================================================
 
