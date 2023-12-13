@@ -257,7 +257,7 @@ public class Cat{
         }
 
         for(Projectile p : w.currentRoom.projectiles){
-            if (catHitbox.anyCollision(p.projHitbox) && !isTransformed){
+            if (p != null && catHitbox.anyCollision(p.projHitbox) && !isTransformed){
                 lives -= 0.5;
                 p.hitSomething = true;
             }

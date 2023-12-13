@@ -76,6 +76,7 @@ public class Room{
             if (currentPlatform.platformPosition.x >= 1024 - (currentPlatform.platformPosition.x + currentPlatform.platformDimensions.x)){ //more space on left or equal space
                 int min = (int)currentPlatform.platformPosition.x - 195 - (length * 100);
                 int max = (int)currentPlatform.platformPosition.x - (length * 100);
+                if (min < 0) min = 0;
                 platforms.add(new Platform(RNG.nextInt(max - min) + min, (int)currentPlatform.platformPosition.y - (RNG.nextInt(100 - 75) + 75), length));
                 leftOrRight = "left";
 
@@ -83,6 +84,7 @@ public class Room{
             else{ //more space on right
                 int min = (int)currentPlatform.platformPosition.x + (int)currentPlatform.platformDimensions.x;
                 int max = (int)currentPlatform.platformPosition.x + (int)currentPlatform.platformDimensions.x + 195;
+                if(max + length * 100 > 1024) max = 1024 - length * 100;
                 platforms.add(new Platform(RNG.nextInt(max - min) + min, (int)currentPlatform.platformPosition.y - (RNG.nextInt(100 - 75) + 75), length));
                 leftOrRight = "right";
             }
@@ -108,6 +110,7 @@ public class Room{
         projectiles = new ArrayList<Projectile>();
         platforms = new ArrayList<Platform>();
         doors = new ArrayList<Door>();
+        enemies = new ArrayList<Enemy>();
         gas = new Gas();
         enemies.add(new Enemy(924, 645, "left"));
         if (roomType == 0){
@@ -171,7 +174,7 @@ public class Room{
             d.draw(g);
         } 
         for (Projectile p : projectiles){
-            p.draw(g);
+            if (p != null) p.draw(g);
         }
 
         if((w.time % 1) <= (1.0/60)) {
@@ -189,7 +192,7 @@ public class Room{
     public void update(World w, double time){
         gas.update(time);
         for(Projectile p: projectiles){
-            p.update(w, time);
+            if (p != null) p.update(w, time);
         }
         for(Enemy e: enemies){
             e.update(w, time);

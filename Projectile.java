@@ -23,12 +23,12 @@ public class Projectile{
     }
 
     public void draw(Graphics g){
-        if (projPosition.x >= initProjPosition.x - projRange && projPosition.x <= initProjPosition.x + projRange && !hitSomething) g.drawImage(projSprite, (int)projPosition.x, (int)projPosition.y, null);
+        g.drawImage(projSprite, (int)projPosition.x, (int)projPosition.y, null);
     }
 
     public void update(World w, double time){
-        if (hitSomething){
-            projPosition = new Pair (0,0);
+        if (hitSomething || !(projPosition.x >= initProjPosition.x - projRange && projPosition.x <= initProjPosition.x + projRange)){
+            w.currentRoom.projectiles.set(w.currentRoom.projectiles.indexOf(this), null);
         }
         projPosition = projPosition.add(projVelocity.times(time));
         projHitbox.update(projPosition);
