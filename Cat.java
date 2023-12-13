@@ -65,7 +65,6 @@ public class Cat implements canShoot{
 
     // =====================================================================
     public void draw(World w, Graphics g){
-        System.out.println(w.time - stateCD);
         if((stateCD != 0) && ((w.time - stateCD) < 10)) {
             try{ 
                 rightSprite = ImageIO.read(new File("dead-still-right.png"));
