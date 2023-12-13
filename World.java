@@ -4,6 +4,10 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.awt.Graphics;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 // =========================================================================
 
 
@@ -20,6 +24,8 @@ public class World{
     public int width;
     public int height;
     public double time;
+    public boolean status;
+    private BufferedImage gameOver;
     public Room firstRoom;
     public Room currentRoom;
     public Cat player;
@@ -45,6 +51,13 @@ public class World{
             roomTypes.add(i);
         }
 
+        try {
+            gameOver = ImageIO.read(new File("game-over.png"));
+        }
+        catch (IOException ex) {
+            System.out.println("Failed to find image.");
+        }
+
     } // World()
     // =====================================================================
 
@@ -53,8 +66,15 @@ public class World{
     // =====================================================================
     public void drawWorld(Graphics g){
         //map.draw(g);
-        currentRoom.draw(this, g);
-        player.draw(this, g);
+        if(status) {
+            g.drawImage(gameOver, 0, 0, null);
+            System.out.println("bruh");
+        }
+
+        else {
+            currentRoom.draw(this, g);
+            player.draw(this, g);
+        }
     } // drawWorld()
     // =====================================================================
 
@@ -68,6 +88,9 @@ public class World{
     } // updateWorld()
     // =====================================================================
 
+
+
+    // =====================================================================
     public void addRoom(int doorNum){
         if (doorNum == 1){
             if (countRooms() < 4) {
@@ -163,7 +186,10 @@ public class World{
                 currentRoom = currentRoom.next2;
             }
         }
-    }
+    } // addRoom()
+    // =====================================================================
+
+
 
     // =====================================================================
     public int countRooms(){
@@ -180,7 +206,9 @@ public class World{
             if (popped == currentRoom) isCurrentRoom = true;
         }
         return count;
-    }
+    } // countRooms()
+    // =====================================================================
+
 
 
 // =========================================================================

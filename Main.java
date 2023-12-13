@@ -5,16 +5,22 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 import java.awt.Dimension;
 import java.util.Random;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.KeyEvent; 
 // =========================================================================
 
 
 
 // =========================================================================
-public class Main extends JPanel implements KeyListener{
+public class Main extends JPanel implements KeyListener, MouseListener{
 // =========================================================================
 
 
@@ -25,6 +31,8 @@ public class Main extends JPanel implements KeyListener{
     public static final int WIDTH = 1024;
     public static final int HEIGHT = 768;
     public static final int FPS = 60;
+    public boolean play;
+    private BufferedImage startScreen;
     World world;
     // =====================================================================
 
@@ -39,7 +47,12 @@ public class Main extends JPanel implements KeyListener{
         // =================================================================
         public void run() {
             while(true){
-                world.updateWorld(1.0/FPS);
+                if((world.player.lives > 0) && (play == true)) {
+                    world.updateWorld(1.0/FPS);
+                }
+                else if(world.player.lives == 0.0) {
+                    world.status = true;
+                }
                 repaint();
                 try{
                     Thread.sleep(1000/FPS);
@@ -113,6 +126,45 @@ public class Main extends JPanel implements KeyListener{
     	char c = e.getKeyChar();
     } // keyTyped()
     // =====================================================================
+
+
+
+    // =====================================================================
+    public void mousePressed(MouseEvent e) { 
+        if(((e.getX() > 370) && (e.getX() < 647)) && ((e.getY() > 432) && (e.getY() < 535))) {
+            play = true;
+        }
+    }
+    // mousePressed()
+    // =====================================================================
+
+
+
+    // =====================================================================
+    public void mouseReleased(MouseEvent e) {}
+    // mouseReleased()
+    // =====================================================================
+
+
+
+    // =====================================================================
+    public void mouseExited(MouseEvent e) {}
+    // mouseExcited()
+    // =====================================================================
+
+
+
+    // =====================================================================
+    public void mouseEntered(MouseEvent e) {}
+    // mouseEntered()
+    // =====================================================================
+
+
+
+    // =====================================================================
+    public void mouseClicked(MouseEvent e) {}
+    // mouseClicked()
+    // =====================================================================
     
 
 
@@ -132,6 +184,7 @@ public class Main extends JPanel implements KeyListener{
     public Main(){
         world = new World(WIDTH, HEIGHT);
         addKeyListener(this);
+        addMouseListener(this);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         Thread mainThread = new Thread(new Runner());
         mainThread.start();
@@ -144,8 +197,10 @@ public class Main extends JPanel implements KeyListener{
     public static void main(String[] args) {
         JFrame frame = new JFrame("Milton Escapes");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Main mainInstance = new Main();
         frame.setContentPane(mainInstance);
+
         frame.pack();
         frame.setVisible(true);
     } // main()
@@ -159,8 +214,19 @@ public class Main extends JPanel implements KeyListener{
      
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-     
-        world.drawWorld(g); 
+
+        try {
+            startScreen = ImageIO.read(new File("start.png"));
+        }
+        catch (IOException ex) {
+            System.out.println("Failed to find image.");
+        } 
+        
+        g.drawImage(startScreen, 0, 0, null);
+
+        if(play) {
+            world.drawWorld(g); 
+        }
     } // paintCompnent()
     // =====================================================================
 
