@@ -211,7 +211,7 @@ public class Cat{
             if (!check) catVelocity.y = 0.01;
         }
 
-        checkCollisions(w, time);
+        checkOtherCollisions(w, time);
         
         if (catVelocity.x < 0.0) orientation = "left";
         else if (catVelocity.x > 0.0) orientation = "right";
@@ -241,26 +241,21 @@ public class Cat{
 
 
     // =====================================================================
-    public boolean checkCollisions(World w, double time){
-        boolean collision = false;
+    public void checkOtherCollisions(World w, double time){
         if (catPosition.y + catDimensions.y >= w.height){
             catPosition.y = w.height - catDimensions.y; //checks if bottom of cat has touched bottom of world
             catVelocity.y = 0.0;
-            collision = true;
         }
         else if (catPosition.y <= 0.0){
             catPosition.y = 0.0; //checks if top of cat has touched top of world
             catVelocity.y = 0.1;
-            collision = true;
         }
         if (catPosition.x + catDimensions.x >= w.width){
             catPosition.x = w.width - catDimensions.x; //checks if right side of cat has touched the right side of world
             catVelocity.y = 0.0;
-            collision = true;
         }
         else if (catPosition.x <= 0.0){
             catPosition.x = 0.0; //checks if left side of cat has touched the left side of world
-            collision = true;
         }
 
         if (w.currentRoom.gas != null && catPosition.y + catDimensions.y >= w.height - w.currentRoom.gas.height && !isTransformed) {
@@ -298,21 +293,26 @@ public class Cat{
             for (Door d : w.currentRoom.doors){
                 if(catHitbox.anyCollision(d.doorHitbox)){
                     if(d.doorType == 0){
-                        double currentTime = w.time;
                         if(w.currentRoom.prev.isRoomZero) {
                             catPosition = new Pair(73, 53);
-                            w.currentRoom.prev.doors.get(0).unlocked = false;
+                            for(Door d2 : w.currentRoom.prev.doors){
+                                d2.unlocked = false;
+                            }
                             w.currentRoom.prev.button.pressed = false;
                         }
                         else{
                             if(w.currentRoom == w.currentRoom.prev.next1){
                                 catPosition = new Pair(w.currentRoom.prev.doors.get(1).doorPosition.x - catDimensions.x, w.currentRoom.prev.doors.get(1).doorPosition.y);
-                                w.currentRoom.prev.doors.get(1).unlocked = false;
+                                for(Door d2 : w.currentRoom.prev.doors){
+                                    d2.unlocked = false;
+                                }
                                 w.currentRoom.prev.button.pressed = false;
                             }
                             else if (w.currentRoom == w.currentRoom.prev.next2){
                                 catPosition = new Pair(w.currentRoom.prev.doors.get(2).doorPosition.x - catDimensions.x, w.currentRoom.prev.doors.get(2).doorPosition.y);
-                                w.currentRoom.prev.doors.get(2).unlocked = false;
+                                for(Door d2 : w.currentRoom.prev.doors){
+                                    d2.unlocked = false;
+                                }
                                 w.currentRoom.prev.button.pressed = false;
                             }
                         }
@@ -341,7 +341,7 @@ public class Cat{
                 }
             }
         }
-        return collision;
+
     } // checkCollisions()
     // =====================================================================
 

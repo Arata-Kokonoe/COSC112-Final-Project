@@ -3,6 +3,7 @@
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.io.File;
 import java.awt.image.BufferedImage;
@@ -62,6 +63,8 @@ public class World{
         //map.draw(g);
         if(status) {
             g.drawImage(gameOver, 0, 0, null);
+            g.setFont(new Font("scoreFont", Font.PLAIN, 40));
+            g.drawString(player.score + "", 575, 410);
         }
 
         else {

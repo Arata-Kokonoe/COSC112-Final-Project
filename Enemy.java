@@ -28,6 +28,7 @@ public class Enemy{
     public String orientation;
     public int health;
     public boolean dead;
+    public boolean gainedPoint;
     // =====================================================================
 
 
@@ -79,12 +80,14 @@ public class Enemy{
         if (p != null && enemyHitbox.anyCollision(p.projHitbox)){
           p.hitSomething = true;
           health --;
-          if (health == 0) dead = true;
+          if (health == 0 && gainedPoint != true) {
+            dead = true;
+            w.player.score++;
+            gainedPoint = false;
+          } 
         }
       }
-
     }
-
 // =========================================================================
 } // class Enemy
 // =========================================================================
