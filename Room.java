@@ -31,6 +31,7 @@ public class Room{
     public ArrayList<Projectile> projectiles;
     public Button button;
     public Gas gas;
+    public Enemy enemy;
     public Room prev;
     public Room next1;
     public Room next2;
@@ -57,6 +58,7 @@ public class Room{
         platforms = new ArrayList<Platform>();
         doors = new ArrayList<Door>();
         gas = new Gas();
+        enemy = new Enemy(924, 645);
         if (roomType == 0){
             platforms.add(new Platform(0, 675, 11));
             platforms.add(new Platform(400, 575, 2));
@@ -170,6 +172,11 @@ public class Room{
         for (Projectile p : projectiles){
             p.draw(g);
         }
+
+        if((w.time % 1) <= (1.0/60)) {
+            enemy.shoot(w);
+        }
+        enemy.draw(w, g);
         gas.draw(w, g);
     } // draw()
     // =====================================================================

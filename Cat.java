@@ -60,6 +60,14 @@ public class Cat{
         orientation = "right";
         stateCD = 0.0;
         state = true;
+
+        try{ 
+            rightAttackSprite = ImageIO.read(new File("attack-right.png"));
+            leftAttackSprite = ImageIO.read(new File("attack-left.png"));
+        }
+        catch (IOException ex) {
+            System.out.println("Failed to find image.");
+        } 
     } // Cat()
     // =====================================================================
 
