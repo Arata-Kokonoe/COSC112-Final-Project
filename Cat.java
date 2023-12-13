@@ -46,6 +46,7 @@ public class Cat{
     private BufferedImage leftHalfHeartSprite;
     private BufferedImage leftAttackSprite;
     private BufferedImage rightAttackSprite;
+    private BufferedImage state;
     public Hitbox catHitbox;
     public String orientation;
     // =====================================================================
@@ -115,6 +116,7 @@ public class Cat{
                 leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
                 rightAttackSprite = ImageIO.read(new File("attack-right.png"));
                 leftAttackSprite = ImageIO.read(new File("attack-left.png"));
+                state = ImageIO.read(new File("changeState.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");
@@ -161,7 +163,11 @@ public class Cat{
         }
 
         if(isTransformed) {
-            g.fillRect((int)catPosition.x, ((int)catPosition.y - 10), 60 - timer, 5);
+            g.fillRect((int)catPosition.x, ((int)catPosition.y - 10), 50 - timer, 5);
+        }
+
+        if(transformState) {
+            g.drawImage(state, (w.width - 60), 40, null);
         }
 
     } // draw()
@@ -197,7 +203,6 @@ public class Cat{
             }
         }
 
-
         if (catVelocity.y == 0.0){
             boolean check = false;
             for (Platform p : w.currentRoom.platforms) {
@@ -205,13 +210,14 @@ public class Cat{
             }
             if (!check) catVelocity.y = 0.01;
         }
+
         checkCollisions(w);
         
         if (catVelocity.x < 0.0) orientation = "left";
         else if (catVelocity.x > 0.0) orientation = "right";
 
         if(isTransformed) {
-            if((w.time % 1) <= (1.0/60)) {
+            if((w.time % 1) >= (59.0/60)) {
                 timer += 5;
             }
         }

@@ -102,6 +102,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
                 if(world.player.transformState == true) {
                     world.player.transformState(world.time);
                     world.player.isTransformed = true;
+                    world.player.timer = 0;
                 }
             }; //switches between dead and alive
             if (c == 'm'){}; // opens map
