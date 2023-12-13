@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 // =========================================================================
-public class Cat implements canShoot{
+public class Cat{
 // =========================================================================
 
 
@@ -27,6 +27,7 @@ public class Cat implements canShoot{
     public Pair catAcceleration;
     public double stateCD;
     public Pair catDimensions;
+    public int attackRange;
     private BufferedImage rightSprite;
     private BufferedImage leftSprite;
     private BufferedImage rightRunSprite1;
@@ -55,6 +56,7 @@ public class Cat implements canShoot{
         catDimensions = new Pair(65.0, 40.0);
         catHitbox = new Hitbox(catDimensions, catPosition);
         lives = 3;
+        attackRange = 100;
         orientation = "right";
         stateCD = 0.0;
         state = true;
@@ -286,9 +288,13 @@ public class Cat implements canShoot{
 
     
     // =====================================================================
-    public void shoot(){
-        
-
+    public void shoot(World w){
+        if (orientation == "left"){
+            w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x, catPosition.y), new Pair(-300, 0), leftAttackSprite, attackRange));
+        }
+        else if (orientation == "right"){
+            w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x, catPosition.y), new Pair(300, 0), rightAttackSprite, attackRange));
+        }
     } // shoot()
     // =====================================================================
 

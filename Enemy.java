@@ -1,4 +1,4 @@
-public class Enemy implements canShoot{
+public class Enemy{
   public void shoot(){
   
   }
