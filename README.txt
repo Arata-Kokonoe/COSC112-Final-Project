@@ -7,11 +7,11 @@ Title of Project: Milton's Escape
 
 Authors: Mana Harada, Andrew Han
 
-Description: "This program will be our own take on a video game combining both aspects of the platformer and roguelike genres. 
-    The theme of the game will revolve around Schrodinger’s Cat thought experiment, where the player will play as a cat named “Milton” trapped inside of a cardboard box. 
-    They will have to traverse through procedurally generated rooms while in constant danger from poisonous gas filling each room, along with enemies trying to kill them at every turn. 
+Description: "This program is our own take on a video game combining both aspects of the platformer and roguelike genres. 
+    The theme of the game revolves around Schrodinger’s Cat thought experiment, where the player plays as a cat named “Milton” trapped inside of a cardboard box.
+    The player will have to traverse through randomly generated rooms while in constant danger from poisonous gas filling each room, along with enemies trying to kill them at every turn. 
     One unique aspect of this game is the ability to switch between a state of dead/alive, both having their own advantages and disadvantages. 
-    As the player continues their epic adventure, they may find extra life consumables in rooms as a way to recover their lost health."
+    As the player continues their epic adventure, they may find extra lives as a way to recover. The ultimate goal of the game is to survive by fighting enemies and reaching the next room."
 
 Controls:
     * A to move left
