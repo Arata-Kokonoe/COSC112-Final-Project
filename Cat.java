@@ -92,7 +92,7 @@ public class Cat{
                 leftRunSprite1 = ImageIO.read(new File("Graphics/dead-run-left-1.png"));
                 leftRunSprite2 = ImageIO.read(new File("Graphics/dead-run-left-2.png"));
                 rightJumpSprite = ImageIO.read(new File("Graphics/dead-jump-right.png"));
-                leftJumpSprite = ImageIO.read(new File("Graphics/ead-jump-left.png"));
+                leftJumpSprite = ImageIO.read(new File("Graphics/dead-jump-left.png"));
                 rightLandSprite = ImageIO.read(new File("Graphics/dead-land-right.png"));
                 leftLandSprite = ImageIO.read(new File("Graphics/dead-land-left.png"));
             }
@@ -322,6 +322,7 @@ public class Cat{
                         if (w.currentRoom.next1 == null) {
                             w.addRoom(1);
                             catPosition = new Pair(100.0, 620.0);
+                            score += 5;
                         }
                         else {
                             w.currentRoom = w.currentRoom.next1;
@@ -332,6 +333,7 @@ public class Cat{
                         if (w.currentRoom.next2 == null) {
                             w.addRoom(2);
                             catPosition = new Pair(100.0, 620.0);
+                            score += 5;
                         }
                         else {
                             w.currentRoom = w.currentRoom.next2;
