@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 // =========================================================================
-public class Cat{
+public class Cat {
 // =========================================================================
 
 
@@ -54,7 +54,7 @@ public class Cat{
 
 
     // =====================================================================
-    public Cat(){
+    public Cat() {
         catPosition = new Pair(50.0, 615.0);
         catVelocity = new Pair(0.0, 0.01);
         catAcceleration = new Pair(0.0, 300.0);
@@ -69,7 +69,7 @@ public class Cat{
         isTransformed = false;
         attackState = true;
 
-        try{ 
+        try { 
             rightAttackSprite = ImageIO.read(new File("Graphics/attack-right.png"));
             leftAttackSprite = ImageIO.read(new File("Graphics/attack-left.png"));
         }
@@ -82,9 +82,15 @@ public class Cat{
 
 
     // =====================================================================
-    public void draw(World w, Graphics g){
+    public void draw(World w, Graphics g) {
+
+
+
+        // =================================================================
+        // Read Images
+
         if((transformStateCD != 0) && ((w.time - transformStateCD) < 10)) {
-            try{ 
+            try { 
                 rightSprite = ImageIO.read(new File("Graphics/dead-still-right.png"));
                 leftSprite = ImageIO.read(new File("Graphics/dead-still-left.png"));
                 rightRunSprite1 = ImageIO.read(new File("Graphics/dead-run-right-1.png"));
@@ -122,6 +128,9 @@ public class Cat{
                 System.out.println("Failed to find image.");
             }
         }
+        // =================================================================
+
+
 
         if (orientation.equals("right")) {
             if((catVelocity.x > 0) && ((((w.time % 1) > (0.125)) && ((w.time % 1) < (0.25))) || (((w.time % 1) > (0.375)) && ((w.time % 1) < (0.5))) || (((w.time % 1) > (0.625)) && ((w.time % 1) < (0.75))) || ((w.time % 1) > (0.875))) && (catVelocity.y == 0)) {
@@ -157,7 +166,7 @@ public class Cat{
                 g.drawImage(leftSprite, (int)catPosition.x, (int)catPosition.y, null);
             }
         }
-        for (double i = 0; i < lives; i += 0.5){
+        for (double i = 0; i < lives; i += 0.5) {
             if(i % 1 != 0) g.drawImage(rightHalfHeartSprite, (int)(w.width - (90 - (30 * (i - 0.5)))), 0, null);
             else if (i % 1 == 0) g.drawImage(leftHalfHeartSprite, (int)(w.width - (90 - (30 * i))), 0, null);
         }
@@ -176,34 +185,34 @@ public class Cat{
 
 
     // =====================================================================
-    public void update(World w, double time){
+    public void update(World w, double time) {
         if (catVelocity.y != 0.0) {
             catVelocity.y = catVelocity.y + (catAcceleration.y * time);
         }
 
         catPosition.y += catVelocity.y * time;
-        for (Platform p : w.currentRoom.platforms){
-            if (catHitbox.topCollision(p.platformHitbox)){
+        for (Platform p : w.currentRoom.platforms) {
+            if (catHitbox.topCollision(p.platformHitbox)) {
                 catPosition.y = p.platformPosition.y - catDimensions.y;
                 catVelocity.y = 0.0;
             }
-            if (catHitbox.botCollision(p.platformHitbox)){
+            if (catHitbox.botCollision(p.platformHitbox)) {
                 catPosition.y = p.platformPosition.y + p.platformDimensions.y;
                 catVelocity.y = 0.0;
             }
         }
 
         catPosition.x += catVelocity.x * time;
-        for (Platform p : w.currentRoom.platforms){
-            if (catHitbox.leftCollision(p.platformHitbox)){
+        for (Platform p : w.currentRoom.platforms) {
+            if (catHitbox.leftCollision(p.platformHitbox)) {
                 catPosition.x = p.platformPosition.x - catDimensions.x; 
             }
-            if (catHitbox.rightCollision(p.platformHitbox)){
+            if (catHitbox.rightCollision(p.platformHitbox)) {
                 catPosition.x = p.platformPosition.x + p.platformDimensions.x;
             }
         }
 
-        if (catVelocity.y == 0.0){
+        if (catVelocity.y == 0.0) {
             boolean check = false;
             for (Platform p : w.currentRoom.platforms) {
                 if (catHitbox.isOnTopOf(p.platformHitbox)) check = true;
@@ -230,7 +239,7 @@ public class Cat{
             isTransformed = false;
         }
 
-        if(w.time > (attackStateCD + 3)){
+        if(w.time > (attackStateCD + 3)) {
             attackState = true;
         }
         
@@ -241,20 +250,20 @@ public class Cat{
 
 
     // =====================================================================
-    public void checkOtherCollisions(World w, double time){
-        if (catPosition.y + catDimensions.y >= w.height){
+    public void checkOtherCollisions(World w, double time) {
+        if (catPosition.y + catDimensions.y >= w.height) {
             catPosition.y = w.height - catDimensions.y; //checks if bottom of cat has touched bottom of world
             catVelocity.y = 0.0;
         }
-        else if (catPosition.y <= 0.0){
+        else if (catPosition.y <= 0.0) {
             catPosition.y = 0.0; //checks if top of cat has touched top of world
             catVelocity.y = 0.1;
         }
-        if (catPosition.x + catDimensions.x >= w.width){
+        if (catPosition.x + catDimensions.x >= w.width) {
             catPosition.x = w.width - catDimensions.x; //checks if right side of cat has touched the right side of world
             catVelocity.y = 0.0;
         }
-        else if (catPosition.x <= 0.0){
+        else if (catPosition.x <= 0.0) {
             catPosition.x = 0.0; //checks if left side of cat has touched the left side of world
         }
 
@@ -265,23 +274,23 @@ public class Cat{
             w.currentRoom.gas.reset();
         }
 
-        if (w.currentRoom.button != null && catHitbox.anyCollision(w.currentRoom.button.buttonHitbox)){
+        if (w.currentRoom.button != null && catHitbox.anyCollision(w.currentRoom.button.buttonHitbox)) {
             w.currentRoom.button.pressed = true;
-            for (Door d : w.currentRoom.doors){
+            for (Door d : w.currentRoom.doors) {
                 d.unlocked = true;
             }
             if (w.currentRoom.gas != null) w.currentRoom.gas.vanish();
         }
 
-        for(Projectile p : w.currentRoom.projectiles){
-            if (p != null && catHitbox.anyCollision(p.projHitbox) && !isTransformed){
+        for(Projectile p : w.currentRoom.projectiles) {
+            if (p != null && catHitbox.anyCollision(p.projHitbox) && !isTransformed) {
                 lives -= 0.5;
                 p.hitSomething = true;
             }
         }
         
-        for(Collectable c : w.currentRoom.collectables){
-            if (c != null && catHitbox.anyCollision(c.collHitbox) && !c.used){
+        for(Collectable c : w.currentRoom.collectables) {
+            if (c != null && catHitbox.anyCollision(c.collHitbox) && !c.used) {
                 if(lives != 3){
                     lives += 0.5;
                     c.used = true;
@@ -289,9 +298,9 @@ public class Cat{
             }
         }
 
-        if(w.currentRoom.button != null && w.currentRoom.button.pressed){
-            for (Door d : w.currentRoom.doors){
-                if(catHitbox.anyCollision(d.doorHitbox)){
+        if(w.currentRoom.button != null && w.currentRoom.button.pressed) {
+            for (Door d : w.currentRoom.doors) {
+                if(catHitbox.anyCollision(d.doorHitbox)) {
                     if(d.doorType == 0){
                         if(w.currentRoom.prev.isRoomZero) {
                             catPosition = new Pair(73, 53);
@@ -301,16 +310,16 @@ public class Cat{
                             w.currentRoom.prev.button.pressed = false;
                         }
                         else{
-                            if(w.currentRoom == w.currentRoom.prev.next1){
+                            if(w.currentRoom == w.currentRoom.prev.next1) {
                                 catPosition = new Pair(w.currentRoom.prev.doors.get(1).doorPosition.x - catDimensions.x, w.currentRoom.prev.doors.get(1).doorPosition.y);
-                                for(Door d2 : w.currentRoom.prev.doors){
+                                for(Door d2 : w.currentRoom.prev.doors) {
                                     d2.unlocked = false;
                                 }
                                 w.currentRoom.prev.button.pressed = false;
                             }
-                            else if (w.currentRoom == w.currentRoom.prev.next2){
+                            else if (w.currentRoom == w.currentRoom.prev.next2) {
                                 catPosition = new Pair(w.currentRoom.prev.doors.get(2).doorPosition.x - catDimensions.x, w.currentRoom.prev.doors.get(2).doorPosition.y);
-                                for(Door d2 : w.currentRoom.prev.doors){
+                                for(Door d2 : w.currentRoom.prev.doors) {
                                     d2.unlocked = false;
                                 }
                                 w.currentRoom.prev.button.pressed = false;
@@ -318,7 +327,7 @@ public class Cat{
                         }
                         w.currentRoom = w.currentRoom.prev;
                     }
-                    else if (d.doorType == 1){
+                    else if (d.doorType == 1) {
                         if (w.currentRoom.next1 == null) {
                             w.addRoom(1);
                             catPosition = new Pair(100.0, 620.0);
@@ -329,7 +338,7 @@ public class Cat{
                             catPosition = new Pair(100.0, 620.0);
                         }
                     }
-                    else if (d.doorType == 2){
+                    else if (d.doorType == 2) {
                         if (w.currentRoom.next2 == null) {
                             w.addRoom(2);
                             catPosition = new Pair(100.0, 620.0);
@@ -359,7 +368,7 @@ public class Cat{
 
 
 
-    public void attackState(double time){
+    public void attackState(double time) {
         attackStateCD = time;
         attackState = false;   
     }
@@ -367,11 +376,12 @@ public class Cat{
 
     
     // =====================================================================
-    public void shoot(World w){
-        if (orientation == "left" && !isTransformed){
+    public void shoot(World w) {
+        if (orientation == "left" && !isTransformed) {
             w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x - leftAttackSprite.getWidth(), catPosition.y), new Pair(-300, 0), leftAttackSprite, attackRange));
         }
-        else if (orientation == "right" && !isTransformed){
+        else if (orientation == "right" && !isTransformed) 
+        {
             w.currentRoom.projectiles.add(new Projectile(new Pair(catPosition.x + catDimensions.x, catPosition.y), new Pair(300, 0), rightAttackSprite, attackRange));
         }
     } // shoot()

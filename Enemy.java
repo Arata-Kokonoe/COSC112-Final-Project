@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 // =========================================================================
-public class Enemy{
+public class Enemy {
 // =========================================================================
 
 
@@ -41,7 +41,7 @@ public class Enemy{
         this.orientation = orientation;
         health = 1;
         dead = false;
-        try{ 
+        try { 
           rightSprite = ImageIO.read(new File("Graphics/enemy-right.png"));
           leftSprite = ImageIO.read(new File("Graphics/enemy-left.png"));
           enemyAttackSprite = ImageIO.read(new File("Graphics/projectile.png"));
@@ -55,8 +55,8 @@ public class Enemy{
 
 
     // =====================================================================
-    public void draw(Graphics g){
-      if(!dead){
+    public void draw(Graphics g) {
+      if(!dead) {
         if (orientation == "left") g.drawImage(leftSprite, xPos, yPos, null);
         else if (orientation == "right") g.drawImage(rightSprite, xPos, yPos, null);
       }
@@ -66,8 +66,8 @@ public class Enemy{
 
 
     // =====================================================================
-    public void shoot(World w){
-      if(!dead){
+    public void shoot(World w) {
+      if(!dead) {
         if (orientation == "left") w.currentRoom.projectiles.add(new Projectile(new Pair(xPos - 10, (yPos + 15)), new Pair(-300, 0), enemyAttackSprite, 1024));
         else if (orientation == "right") w.currentRoom.projectiles.add(new Projectile(new Pair(xPos + 45, (yPos + 15)), new Pair(300, 0), enemyAttackSprite, 1024));
       }
@@ -75,9 +75,11 @@ public class Enemy{
     // =====================================================================
 
 
-    public void update(World w, double time){
+      
+    // =====================================================================
+    public void update(World w, double time) {
       for(Projectile p: w.currentRoom.projectiles){
-        if (p != null && enemyHitbox.anyCollision(p.projHitbox)){
+        if (p != null && enemyHitbox.anyCollision(p.projHitbox)) {
           p.hitSomething = true;
           health --;
           if (health == 0 && gainedPoint != true) {
@@ -87,7 +89,11 @@ public class Enemy{
           } 
         }
       }
-    }
+    } // update()
+    // =====================================================================
+
+
+
 // =========================================================================
 } // class Enemy
 // =========================================================================

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 // =========================================================================
-public class Gas{
+public class Gas {
 // =========================================================================
 
 
@@ -29,7 +29,7 @@ public class Gas{
 
 
     // =====================================================================
-    public Gas(){
+    public Gas() {
         height = 0;
         lineHeight = 50;
         exists = true;
@@ -47,7 +47,7 @@ public class Gas{
 
 
     // =====================================================================
-    public void draw(World w, Graphics g){
+    public void draw(World w, Graphics g) {
         g.drawImage(gasGradient, 0, w.height - height, null);
         g.drawImage(gasSprite, 0, w.height - height, null);
     } // draw()
@@ -56,7 +56,7 @@ public class Gas{
 
 
     // =====================================================================
-    public void update(double time){
+    public void update(double time) {
         if (exists){
             counter += (int)(60 * time);
             if (counter == 180) {
@@ -71,7 +71,7 @@ public class Gas{
 
 
     // =====================================================================
-    public void reset(){
+    public void reset() {
         height = 0;
         lineHeight = 50;
         counter = 0;
@@ -81,7 +81,7 @@ public class Gas{
 
 
     // =====================================================================
-    public void vanish(){
+    public void vanish() {
         exists = false;
         height = -50;
         lineHeight = 0;

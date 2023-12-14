@@ -14,7 +14,7 @@ public class Pair {
 
 
     // =====================================================================
-    public Pair(double initX, double initY){
+    public Pair(double initX, double initY) {
     	x = initX;
     	y = initY;
     } // Pair()
@@ -23,7 +23,7 @@ public class Pair {
 
 
     // =====================================================================
-    public Pair add(Pair toAdd){
+    public Pair add(Pair toAdd) {
     	return new Pair(x + toAdd.x, y + toAdd.y);
     } // add()
     // =====================================================================
@@ -31,7 +31,7 @@ public class Pair {
 
 
     // =====================================================================
-    public Pair addX(double x){
+    public Pair addX(double x) {
         return new Pair(this.x + x, y);
     } // addX()
     // =====================================================================
@@ -39,7 +39,7 @@ public class Pair {
 
 
     // =====================================================================
-    public Pair addY(double y){
+    public Pair addY(double y) {
         return new Pair(x, this.y + y);
     } // addY()
     // =====================================================================
@@ -47,7 +47,7 @@ public class Pair {
 
  
     // =====================================================================
-    public Pair divide(double denom){
+    public Pair divide(double denom) {
     	return new Pair(x / denom, y / denom);
     } // divide()
     // =====================================================================
@@ -55,25 +55,9 @@ public class Pair {
 
 
     // =====================================================================
-    public Pair times(double val){
+    public Pair times(double val) {
     	return new Pair(x * val, y * val);
     } // times()
-    // =====================================================================
-
-
-
-    // =====================================================================
-    public void flipX(){
-    	x = -x;
-    } // flipX()
-    // =====================================================================
-
-
-
-    // ===================================================================== 
-    public void flipY(){
-    	y = -y;
-    } // flipY()
     // =====================================================================
 
 

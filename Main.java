@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 
 
 // =========================================================================
-public class Main extends JPanel implements KeyListener, MouseListener{
+public class Main extends JPanel implements KeyListener, MouseListener {
 // =========================================================================
 
 
@@ -38,7 +38,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 
 
     // =====================================================================
-    class Runner implements Runnable{
+    class Runner implements Runnable {
     // =====================================================================
 
 
@@ -53,9 +53,9 @@ public class Main extends JPanel implements KeyListener, MouseListener{
                     world.status = true;
                 }
                 repaint();
-                try{
+                try {
                     Thread.sleep(1000/FPS);
-                    }
+                }
                 catch(InterruptedException e){}
             }
      
@@ -76,34 +76,32 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     public void keyPressed(KeyEvent e) {
         char c = e.getKeyChar();
         if(play){
-            if (c == 'a'){
+            if (c == 'a') {
                 world.player.catVelocity.x = -150;
             }; //moves left
-            if (c == 'd'){
+            if (c == 'd') {
                 world.player.catVelocity.x = 150;
             }; //moves right
-            if (c == ' '){
-                if ((world.player.catVelocity.y == 0.0) && (jump == true)){
+            if (c == ' ') {
+                if ((world.player.catVelocity.y == 0.0) && (jump == true)) {
                     jump = false;
                     world.player.catVelocity.y = -250.0;
                 }
             }; //jumps
-            if (c == 'j'){
+            if (c == 'j') {
                 if (world.player.attackState == true && attack == true) {
                     attack = false;
                     world.player.attackState(world.time);
                     world.player.shoot(world);
                 }
             }; //attacks
-            if (c == 'k'){
+            if (c == 'k') {
                 if(world.player.transformState == true) {
                     world.player.transformState(world.time);
                     world.player.isTransformed = true;
                     world.player.timer = 0;
                 }
-            }; //switches between dead and alive
-            if (c == 'm'){}; // opens map
-            if (c == 'p'){}; // opens the menus; change later to Esc if possible
+            } //switches between dead and alive
         }
     } // keyPressed()
     // =====================================================================
@@ -113,10 +111,10 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     // =====================================================================
     public void keyReleased(KeyEvent e) {
         char c = e.getKeyChar();
-        if (c == 'a' && world.player.catVelocity.x == -150){
+        if (c == 'a' && world.player.catVelocity.x == -150) {
             world.player.catVelocity.x = 0.0;
         }; // stops movement
-        if (c == 'd' && world.player.catVelocity.x == 150){
+        if (c == 'd' && world.player.catVelocity.x == 150) {
             world.player.catVelocity.x = 0.0;
         }; // stops movement
         if(c == ' ') {
@@ -202,7 +200,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
     /**
      * The specialized constructor.
      **/
-    public Main(){
+    public Main() {
         world = new World(WIDTH, HEIGHT);
         addKeyListener(this);
         addMouseListener(this);

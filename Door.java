@@ -31,7 +31,7 @@ public class Door {
 
 
     // =====================================================================
-    public Door(double x, double y, int type){
+    public Door(double x, double y, int type) {
         doorPosition = new Pair(x, y);
         unlocked = false;
         try {                
@@ -50,7 +50,7 @@ public class Door {
 
 
     // =====================================================================
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
         if (unlocked) g.drawImage(openDoor, (int)doorPosition.x, (int)doorPosition.y, null);
         else g.drawImage(closedDoor, (int)doorPosition.x, (int)doorPosition.y, null);
     } // draw()
