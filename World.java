@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 // =========================================================================
-public class World{
+public class World {
 // =========================================================================
 
 
@@ -37,7 +37,7 @@ public class World{
 
 
     // =====================================================================
-    public World(int width, int height){
+    public World(int width, int height) {
         this.width = width;
         this.height = height;
         player = new Cat();
@@ -58,7 +58,7 @@ public class World{
 
 
     // =====================================================================
-    public void drawWorld(Graphics g){
+    public void drawWorld(Graphics g) {
         //map.draw(g);
         if(status) {
             g.drawImage(gameOver, 0, 0, null);
@@ -76,7 +76,7 @@ public class World{
 
 
     // =====================================================================
-    public void updateWorld(double time){
+    public void updateWorld(double time) {
         currentRoom.update(this, time);
         player.update(this, time);
         this.time += time;
@@ -86,18 +86,18 @@ public class World{
 
 
     // =====================================================================
-    public void addRoom(int doorNum){
-        if (currentRoom.isRoomZero){
+    public void addRoom(int doorNum) {
+        if (currentRoom.isRoomZero) {
             currentRoom.next1 = new Room(1);
             currentRoom.next1.prev = currentRoom;
             currentRoom = currentRoom.next1;
         }
-        else if (doorNum == 1){
+        else if (doorNum == 1) {
             currentRoom.next1 = new Room(RNG, countRooms());
             currentRoom.next1.prev = currentRoom;
             currentRoom = currentRoom.next1;
         }
-        else if (doorNum == 2){
+        else if (doorNum == 2) {
             currentRoom.next2 = new Room(RNG, countRooms());
             currentRoom.next2.prev = currentRoom;
             currentRoom = currentRoom.next2;
@@ -105,10 +105,10 @@ public class World{
     }
 
     // =====================================================================
-    public int countRooms(){
+    public int countRooms() {
         int count = 1;
         Room roomPointer = currentRoom;
-        while(roomPointer != firstRoom){
+        while(roomPointer != firstRoom) {
             count++;
             roomPointer = roomPointer.prev; 
         }

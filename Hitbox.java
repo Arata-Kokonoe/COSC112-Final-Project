@@ -18,7 +18,7 @@ public class Hitbox {
 
 
     // =====================================================================
-    public Hitbox(Pair dimensions, Pair position){
+    public Hitbox(Pair dimensions, Pair position) {
         hitboxWidth = (int)dimensions.x;
         hitboxHeight = (int)dimensions.y;
         hitboxLeft = (int)position.x;
@@ -31,12 +31,12 @@ public class Hitbox {
 
 
     // =====================================================================
-    public boolean topCollision(Hitbox other){
+    public boolean topCollision(Hitbox other) {
         double b_collision = other.hitboxBot - hitboxTop;
         double t_collision = hitboxBot - other.hitboxTop;
         double l_collision = hitboxRight - other.hitboxLeft;
         double r_collision = other.hitboxRight - hitboxLeft;
-        if (anyCollision(other) && (t_collision < b_collision && t_collision < l_collision && t_collision < r_collision)){
+        if (anyCollision(other) && (t_collision < b_collision && t_collision < l_collision && t_collision < r_collision)) {
             return true;
         }
 
@@ -48,12 +48,12 @@ public class Hitbox {
 
 
     // =====================================================================
-    public boolean leftCollision(Hitbox other){
+    public boolean leftCollision(Hitbox other) {
         double b_collision = other.hitboxBot - hitboxTop;
         double t_collision = hitboxBot - other.hitboxTop;
         double l_collision = hitboxRight - other.hitboxLeft;
         double r_collision = other.hitboxRight - hitboxLeft;
-        if (anyCollision(other) && (l_collision < t_collision && l_collision < b_collision && l_collision < r_collision)){
+        if (anyCollision(other) && (l_collision < t_collision && l_collision < b_collision && l_collision < r_collision)) {
             return true;
         }
 
@@ -65,12 +65,12 @@ public class Hitbox {
 
 
     // =====================================================================
-    public boolean rightCollision(Hitbox other){
+    public boolean rightCollision(Hitbox other) {
         double b_collision = other.hitboxBot - hitboxTop;
         double t_collision = hitboxBot - other.hitboxTop;
         double l_collision = hitboxRight - other.hitboxLeft;
         double r_collision = other.hitboxRight - hitboxLeft;
-        if (anyCollision(other) && (r_collision < t_collision && r_collision < l_collision && r_collision < b_collision)){
+        if (anyCollision(other) && (r_collision < t_collision && r_collision < l_collision && r_collision < b_collision)) {
             return true;
         }
 
@@ -82,12 +82,12 @@ public class Hitbox {
 
 
     // =====================================================================
-    public boolean botCollision(Hitbox other){
+    public boolean botCollision(Hitbox other) {
         double b_collision = other.hitboxBot - hitboxTop;
         double t_collision = hitboxBot - other.hitboxTop;
         double l_collision = hitboxRight - other.hitboxLeft;
         double r_collision = other.hitboxRight - hitboxLeft;
-        if (anyCollision(other) && (b_collision < t_collision && b_collision < l_collision && b_collision < r_collision)){
+        if (anyCollision(other) && (b_collision < t_collision && b_collision < l_collision && b_collision < r_collision)) {
             return true;
         }
         
@@ -99,8 +99,8 @@ public class Hitbox {
 
 
     // =====================================================================
-    public boolean isOnTopOf(Hitbox other){
-        if ((hitboxBot >= other.hitboxTop - buffer) && (hitboxBot < other.hitboxBot) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) || (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))){
+    public boolean isOnTopOf(Hitbox other) {
+        if ((hitboxBot >= other.hitboxTop - buffer) && (hitboxBot < other.hitboxBot) && ((hitboxRight > other.hitboxLeft && hitboxRight < other.hitboxRight) || (hitboxLeft > other.hitboxLeft && hitboxLeft < other.hitboxRight))) {
             return true;
         }
         else return false;
@@ -110,8 +110,8 @@ public class Hitbox {
 
 
     // =====================================================================
-    public boolean anyCollision(Hitbox other){
-        if (hitboxLeft < other.hitboxRight && hitboxRight > other.hitboxLeft && hitboxTop < other.hitboxBot && hitboxBot > other.hitboxTop){
+    public boolean anyCollision(Hitbox other) {
+        if (hitboxLeft < other.hitboxRight && hitboxRight > other.hitboxLeft && hitboxTop < other.hitboxBot && hitboxBot > other.hitboxTop) {
             return true;
         }
         else return false;
@@ -121,7 +121,7 @@ public class Hitbox {
 
 
     // =====================================================================
-    public void update(Pair position){
+    public void update(Pair position) {
         hitboxLeft = (int)position.x;
         hitboxRight = (int)position.x + hitboxWidth;
         hitboxTop = (int)position.y;
@@ -134,8 +134,3 @@ public class Hitbox {
 // =========================================================================
 } // class Hitbox
 // =========================================================================
-
-/*
- * System.out.println("Cat left: \t" + hitboxLeft + "\nCat right: \t" + hitboxRight + "\nCat top: \t" + hitboxTop + "\nCat bot: \t" + hitboxBot);
- * System.out.println("Platform left: \t" + other.hitboxLeft + "\nPlatform right:\t" + other.hitboxRight + "\nPlatform top: \t" + other.hitboxTop + "\nPlatform bot: \t" + other.hitboxBot);
- */

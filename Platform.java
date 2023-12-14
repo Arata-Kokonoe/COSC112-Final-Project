@@ -9,7 +9,7 @@ import java.io.IOException;
 // =========================================================================
 
 // =========================================================================
-public class Platform{
+public class Platform {
 // =========================================================================
 
 
@@ -27,7 +27,7 @@ public class Platform{
 
 
     // =====================================================================
-    public Platform(int x, int y, int repeat){
+    public Platform(int x, int y, int repeat) {
         platformDimensions = new Pair(100*repeat, 25);
         platformPosition = new Pair(x, y);
         platformHitbox = new Hitbox(platformDimensions, platformPosition);
@@ -44,10 +44,10 @@ public class Platform{
 
 
     // =====================================================================
-    public void draw(Graphics g){
-       for(int i = 0; i < repeat; i++) {
-        g.drawImage(platform, (int)(platformPosition.x + (100 * i)), (int)platformPosition.y, null);
-       }
+    public void draw(Graphics g) {
+        for(int i = 0; i < repeat; i++) {
+            g.drawImage(platform, (int)(platformPosition.x + (100 * i)), (int)platformPosition.y, null);
+        }
     } // draw()
     // =====================================================================
 

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 // =========================================================================
-public class Button{
+public class Button {
 // =========================================================================
 
 
@@ -29,7 +29,7 @@ public class Button{
 
 
     // =====================================================================
-    public Button(double x, double y){
+    public Button(double x, double y) {
         buttonPosition = new Pair(x, y);
         try {                
             onButton = ImageIO.read(new File("Graphics/buttonOn.png"));
@@ -45,7 +45,7 @@ public class Button{
 
 
     // =====================================================================
-    public void draw(World w, Graphics g){
+    public void draw(World w, Graphics g) {
         if (pressed) g.drawImage(onButton, (int)buttonPosition.x, (int)buttonPosition.y + 10, null);
         else g.drawImage(offButton, (int)buttonPosition.x, (int)buttonPosition.y, null);
     } // draw()
