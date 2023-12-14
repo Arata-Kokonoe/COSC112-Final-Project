@@ -108,10 +108,10 @@ public class Room {
                 if (randomPlatform == 1) {
                     enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x - 39), (int)platforms.get(randomPlatform).platformPosition.y - 35, "left"));
                 }
-                else if (platforms.get(randomPlatform).platformPosition.x >= 1024 - (platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x)) {
+                else if (platforms.get(randomPlatform).platformPosition.x >= platforms.get(randomPlatform - 1).platformPosition.x) {
                     enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x - 39), (int)platforms.get(randomPlatform).platformPosition.y - 35, "left"));
                 }
-                else enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x), (int)platforms.get(randomPlatform).platformPosition.y - 35, "right"));
+                else if (platforms.get(randomPlatform).platformPosition.x < platforms.get(randomPlatform - 1).platformPosition.x) enemies.add(new Enemy((int)(platforms.get(randomPlatform).platformPosition.x), (int)platforms.get(randomPlatform).platformPosition.y - 35, "right"));
                 platformIndexes.remove(platformIndexes.indexOf(randomPlatform));
             }
         }
@@ -132,6 +132,7 @@ public class Room {
             if(!platformIndexes.isEmpty()) {
                 int randomPlatform = platformIndexes.get(RNG.nextInt(platformIndexes.size()));
                 collectables.add(new Collectable((int)(platforms.get(randomPlatform).platformPosition.x + platforms.get(randomPlatform).platformDimensions.x/2 - 15), (int)(platforms.get(randomPlatform).platformPosition.y - 30)));
+                platformIndexes.remove(platformIndexes.indexOf(randomPlatform));
             }
         }
         
@@ -231,7 +232,7 @@ public class Room {
             c.draw(g);
         }
 
-        if((w.time % 1) <= (1.0/60)) {
+        if((w.time % 2) <= (1.0/60)) {
             for(Enemy e : enemies) {
                 e.shoot(w);
             }
