@@ -83,6 +83,12 @@ public class Cat {
 
     // =====================================================================
     public void draw(World w, Graphics g) {
+
+
+
+        // =================================================================
+        // Read Images
+
         if((transformStateCD != 0) && ((w.time - transformStateCD) < 10)) {
             try { 
                 rightSprite = ImageIO.read(new File("Graphics/dead-still-right.png"));
@@ -92,7 +98,7 @@ public class Cat {
                 leftRunSprite1 = ImageIO.read(new File("Graphics/dead-run-left-1.png"));
                 leftRunSprite2 = ImageIO.read(new File("Graphics/dead-run-left-2.png"));
                 rightJumpSprite = ImageIO.read(new File("Graphics/dead-jump-right.png"));
-                leftJumpSprite = ImageIO.read(new File("Graphics/ead-jump-left.png"));
+                leftJumpSprite = ImageIO.read(new File("Graphics/dead-jump-left.png"));
                 rightLandSprite = ImageIO.read(new File("Graphics/dead-land-right.png"));
                 leftLandSprite = ImageIO.read(new File("Graphics/dead-land-left.png"));
             }
@@ -122,6 +128,9 @@ public class Cat {
                 System.out.println("Failed to find image.");
             }
         }
+        // =================================================================
+
+
 
         if (orientation.equals("right")) {
             if((catVelocity.x > 0) && ((((w.time % 1) > (0.125)) && ((w.time % 1) < (0.25))) || (((w.time % 1) > (0.375)) && ((w.time % 1) < (0.5))) || (((w.time % 1) > (0.625)) && ((w.time % 1) < (0.75))) || ((w.time % 1) > (0.875))) && (catVelocity.y == 0)) {
