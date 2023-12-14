@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.awt.Dimension;
-import java.util.Random;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -132,9 +131,8 @@ public class Main extends JPanel implements KeyListener, MouseListener{
 
 
     // =====================================================================
-    public void keyTyped(KeyEvent e) {
-    	char c = e.getKeyChar();
-    } // keyTyped()
+    public void keyTyped(KeyEvent e) {} 
+    // keyTyped()
     // =====================================================================
 
 
@@ -240,7 +238,7 @@ public class Main extends JPanel implements KeyListener, MouseListener{
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         try {
-            startScreen = ImageIO.read(new File("start.png"));
+            startScreen = ImageIO.read(new File("Graphics/start.png"));
         }
         catch (IOException ex) {
             System.out.println("Failed to find image.");

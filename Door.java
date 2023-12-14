@@ -35,8 +35,8 @@ public class Door {
         doorPosition = new Pair(x, y);
         unlocked = false;
         try {                
-            openDoor = ImageIO.read(new File("openDoor.png"));
-            closedDoor = ImageIO.read(new File("closedDoor.png"));
+            openDoor = ImageIO.read(new File("Graphics/openDoor.png"));
+            closedDoor = ImageIO.read(new File("Graphics/closedDoor.png"));
         } 
         catch (IOException ex) {
             System.out.println("Failed to find image.");

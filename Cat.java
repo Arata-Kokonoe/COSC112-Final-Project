@@ -70,8 +70,8 @@ public class Cat{
         attackState = true;
 
         try{ 
-            rightAttackSprite = ImageIO.read(new File("attack-right.png"));
-            leftAttackSprite = ImageIO.read(new File("attack-left.png"));
+            rightAttackSprite = ImageIO.read(new File("Graphics/attack-right.png"));
+            leftAttackSprite = ImageIO.read(new File("Graphics/attack-left.png"));
         }
         catch (IOException ex) {
             System.out.println("Failed to find image.");
@@ -85,16 +85,16 @@ public class Cat{
     public void draw(World w, Graphics g){
         if((transformStateCD != 0) && ((w.time - transformStateCD) < 10)) {
             try{ 
-                rightSprite = ImageIO.read(new File("dead-still-right.png"));
-                leftSprite = ImageIO.read(new File("dead-still-left.png"));
-                rightRunSprite1 = ImageIO.read(new File("dead-run-right-1.png"));
-                rightRunSprite2 = ImageIO.read(new File("dead-run-right-2.png"));
-                leftRunSprite1 = ImageIO.read(new File("dead-run-left-1.png"));
-                leftRunSprite2 = ImageIO.read(new File("dead-run-left-2.png"));
-                rightJumpSprite = ImageIO.read(new File("dead-jump-right.png"));
-                leftJumpSprite = ImageIO.read(new File("dead-jump-left.png"));
-                rightLandSprite = ImageIO.read(new File("dead-land-right.png"));
-                leftLandSprite = ImageIO.read(new File("dead-land-left.png"));
+                rightSprite = ImageIO.read(new File("Graphics/dead-still-right.png"));
+                leftSprite = ImageIO.read(new File("Graphics/dead-still-left.png"));
+                rightRunSprite1 = ImageIO.read(new File("Graphics/dead-run-right-1.png"));
+                rightRunSprite2 = ImageIO.read(new File("Graphics/dead-run-right-2.png"));
+                leftRunSprite1 = ImageIO.read(new File("Graphics/dead-run-left-1.png"));
+                leftRunSprite2 = ImageIO.read(new File("Graphics/dead-run-left-2.png"));
+                rightJumpSprite = ImageIO.read(new File("Graphics/dead-jump-right.png"));
+                leftJumpSprite = ImageIO.read(new File("Graphics/ead-jump-left.png"));
+                rightLandSprite = ImageIO.read(new File("Graphics/dead-land-right.png"));
+                leftLandSprite = ImageIO.read(new File("Graphics/dead-land-left.png"));
             }
             catch (IOException ex) {
                 System.out.println("Failed to find image.");
@@ -102,21 +102,21 @@ public class Cat{
         }
         else {
             try {                
-                rightSprite = ImageIO.read(new File("cat-still-right.png"));
-                leftSprite = ImageIO.read(new File("cat-still-left.png"));
-                rightRunSprite1 = ImageIO.read(new File("cat-run-right-1.png"));
-                rightRunSprite2 = ImageIO.read(new File("cat-run-right-2.png"));
-                leftRunSprite1 = ImageIO.read(new File("cat-run-left-1.png"));
-                leftRunSprite2 = ImageIO.read(new File("cat-run-left-2.png"));
-                rightJumpSprite = ImageIO.read(new File("cat-jump-right.png"));
-                leftJumpSprite = ImageIO.read(new File("cat-jump-left.png"));
-                rightLandSprite = ImageIO.read(new File("cat-land-right.png"));
-                leftLandSprite = ImageIO.read(new File("cat-land-left.png"));
-                rightHalfHeartSprite = ImageIO.read(new File("HalfHeartRight.png"));
-                leftHalfHeartSprite = ImageIO.read(new File("HalfHeartLeft.png"));
-                rightAttackSprite = ImageIO.read(new File("attack-right.png"));
-                leftAttackSprite = ImageIO.read(new File("attack-left.png"));
-                state = ImageIO.read(new File("changeState.png"));
+                rightSprite = ImageIO.read(new File("Graphics/cat-still-right.png"));
+                leftSprite = ImageIO.read(new File("Graphics/cat-still-left.png"));
+                rightRunSprite1 = ImageIO.read(new File("Graphics/cat-run-right-1.png"));
+                rightRunSprite2 = ImageIO.read(new File("Graphics/cat-run-right-2.png"));
+                leftRunSprite1 = ImageIO.read(new File("Graphics/cat-run-left-1.png"));
+                leftRunSprite2 = ImageIO.read(new File("Graphics/cat-run-left-2.png"));
+                rightJumpSprite = ImageIO.read(new File("Graphics/cat-jump-right.png"));
+                leftJumpSprite = ImageIO.read(new File("Graphics/cat-jump-left.png"));
+                rightLandSprite = ImageIO.read(new File("Graphics/cat-land-right.png"));
+                leftLandSprite = ImageIO.read(new File("Graphics/cat-land-left.png"));
+                rightHalfHeartSprite = ImageIO.read(new File("Graphics/HalfHeartRight.png"));
+                leftHalfHeartSprite = ImageIO.read(new File("Graphics/HalfHeartLeft.png"));
+                rightAttackSprite = ImageIO.read(new File("Graphics/attack-right.png"));
+                leftAttackSprite = ImageIO.read(new File("Graphics/attack-left.png"));
+                state = ImageIO.read(new File("Graphics/changeState.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");

@@ -15,7 +15,7 @@ public class Collectable{
     public Collectable(int x, int y){
         collPosition = new Pair(x, y);
         try {                
-                collSprite = ImageIO.read(new File("HalfHeartLeft.png"));
+                collSprite = ImageIO.read(new File("Graphics/HalfHeartLeft.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");

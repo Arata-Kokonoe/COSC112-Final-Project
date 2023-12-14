@@ -33,7 +33,7 @@ public class Platform{
         platformHitbox = new Hitbox(platformDimensions, platformPosition);
         this.repeat = repeat;
         try {                
-            platform = ImageIO.read(new File("platform.png"));
+            platform = ImageIO.read(new File("Graphics/platform.png"));
         } 
         catch (IOException ex) {
             System.out.println("Failed to find image.");

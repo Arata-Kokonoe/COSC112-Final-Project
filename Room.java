@@ -60,8 +60,8 @@ public class Room{
         int numDoors = RNG.nextInt(2) + 1;
 
         try {                
-                wall = ImageIO.read(new File("wall.png"));
-                line = ImageIO.read(new File("line.png"));
+                wall = ImageIO.read(new File("Graphics/wall.png"));
+                line = ImageIO.read(new File("Graphics/line.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");
@@ -153,8 +153,8 @@ public class Room{
         collectables = new ArrayList<Collectable>();
         if (roomType == 0){
             try {                
-                wall = ImageIO.read(new File("wall-1.png"));
-                line = ImageIO.read(new File("line.png"));
+                wall = ImageIO.read(new File("Graphics/wall-1.png"));
+                line = ImageIO.read(new File("Graphics/line.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");
@@ -174,8 +174,8 @@ public class Room{
         }
         else if (roomType == 1){
             try {                
-                wall = ImageIO.read(new File("wall-2.png"));
-                line = ImageIO.read(new File("line.png"));
+                wall = ImageIO.read(new File("Graphics/wall-2.png"));
+                line = ImageIO.read(new File("Graphics/line.png"));
             } 
             catch (IOException ex) {
                 System.out.println("Failed to find image.");

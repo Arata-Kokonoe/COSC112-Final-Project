@@ -42,9 +42,9 @@ public class Enemy{
         health = 1;
         dead = false;
         try{ 
-          rightSprite = ImageIO.read(new File("enemy-right.png"));
-          leftSprite = ImageIO.read(new File("enemy-left.png"));
-          enemyAttackSprite = ImageIO.read(new File("projectile.png"));
+          rightSprite = ImageIO.read(new File("Graphics/enemy-right.png"));
+          leftSprite = ImageIO.read(new File("Graphics/enemy-left.png"));
+          enemyAttackSprite = ImageIO.read(new File("Graphics/projectile.png"));
         }
         catch (IOException ex) {
             System.out.println("Failed to find image.");

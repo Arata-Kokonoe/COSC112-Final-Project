@@ -35,8 +35,8 @@ public class Gas{
         exists = true;
 
         try {                
-            gasSprite = ImageIO.read(new File("Gas.png"));
-            gasGradient = ImageIO.read(new File("gas-gradient.png"));
+            gasSprite = ImageIO.read(new File("Graphics/Gas.png"));
+            gasGradient = ImageIO.read(new File("Graphics/gas-gradient.png"));
         } 
         catch (IOException ex) {
             System.out.println("Failed to find image.");

@@ -32,8 +32,8 @@ public class Button{
     public Button(double x, double y){
         buttonPosition = new Pair(x, y);
         try {                
-            onButton = ImageIO.read(new File("buttonOn.png"));
-            offButton = ImageIO.read(new File("buttonOff.png"));
+            onButton = ImageIO.read(new File("Graphics/buttonOn.png"));
+            offButton = ImageIO.read(new File("Graphics/buttonOff.png"));
         } 
         catch (IOException ex) {
             System.out.println("Failed to find image.");

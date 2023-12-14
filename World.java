@@ -30,7 +30,6 @@ public class World{
     public Room firstRoom;
     public Room currentRoom;
     public Cat player;
-    public Map map;
     public ArrayList<Integer> roomTypes;
     public final Random RNG = new Random((int)Math.floor(Math.random() * (10000-1000) + 1000)); //find a way to change 12345 into a random seed (AKA key)
     // =====================================================================
@@ -47,7 +46,7 @@ public class World{
         currentRoom = firstRoom;
 
         try {
-            gameOver = ImageIO.read(new File("game-over.png"));
+            gameOver = ImageIO.read(new File("Graphics/game-over.png"));
         }
         catch (IOException ex) {
             System.out.println("Failed to find image.");
